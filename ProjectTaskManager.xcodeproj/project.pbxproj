@@ -11,6 +11,8 @@
 		766CA6EB2AA2713C00BE2D47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6EA2AA2713C00BE2D47 /* ContentView.swift */; };
 		766CA6ED2AA2713E00BE2D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 766CA6EC2AA2713E00BE2D47 /* Assets.xcassets */; };
 		766CA6F02AA2713E00BE2D47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 766CA6EF2AA2713E00BE2D47 /* Preview Assets.xcassets */; };
+		766CA6F92AA271C800BE2D47 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6F82AA271C800BE2D47 /* Task.swift */; };
+		766CA6FB2AA3285E00BE2D47 /* TaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		766CA6EC2AA2713E00BE2D47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		766CA6EF2AA2713E00BE2D47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		766CA6F12AA2713E00BE2D47 /* ProjectTaskManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProjectTaskManager.entitlements; sourceTree = "<group>"; };
+		766CA6F82AA271C800BE2D47 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 		766CA6E72AA2713C00BE2D47 /* ProjectTaskManager */ = {
 			isa = PBXGroup;
 			children = (
+				766CA6F72AA271B800BE2D47 /* Model */,
 				766CA6E82AA2713C00BE2D47 /* ProjectTaskManagerApp.swift */,
 				766CA6EA2AA2713C00BE2D47 /* ContentView.swift */,
 				766CA6EC2AA2713E00BE2D47 /* Assets.xcassets */,
@@ -67,6 +72,15 @@
 				766CA6EF2AA2713E00BE2D47 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		766CA6F72AA271B800BE2D47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				766CA6F82AA271C800BE2D47 /* Task.swift */,
+				766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				766CA6EB2AA2713C00BE2D47 /* ContentView.swift in Sources */,
+				766CA6F92AA271C800BE2D47 /* Task.swift in Sources */,
+				766CA6FB2AA3285E00BE2D47 /* TaskGroup.swift in Sources */,
 				766CA6E92AA2713C00BE2D47 /* ProjectTaskManagerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
