@@ -684,7 +684,13 @@ struct ContentView: View {
 
 
 
-Dobra, sprawdźmy. Jeśli coś wybiorę z "Kup", zobaczysz, że szuka, a jeśli wyczyszczę pole tekstowe, wraca do wyświetlania wszystkich. W tym przypadku. Istnieje wiele innych filtrów, które można zastosować, na przykład, zamiast używać tutaj "Done" i "Upcoming" jako osobnej sekcji, można także dodać opcje filtrowania. Prawdopodobnie przydatne jest uwzględnienie wielu filtrów. Na przykład można używać tokenów do wyszukiwania wielu terminów w tekście. Coś, co zawiera "crazy" i zawiera "world", na przykład, to była by ta pozycja. Chociaż na iOS mamy wyszukiwanie, myślę, że na macOS jest to jeszcze ważniejsze. To narzędzie do pracy, prawdopodobnie masz dużo danych, notatek, naprawdę chcesz pozwolić użytkownikowi na bardziej precyzyjne wyszukiwanie. 
+Dobra, sprawdźmy. Jeśli coś wybiorę z "Kup", zobaczysz, że szuka, a jeśli wyczyszczę pole tekstowe, wraca do wyświetlania wszystkich. 
+
+![2023-09-02_17-30-02 (1)](2023-09-02_17-30-02%20(1).gif)
+
+
+
+ Istnieje wiele innych filtrów, które można zastosować, na przykład, zamiast używać tutaj "Done" i "Upcoming" jako osobnej sekcji, można także dodać opcje filtrowania. Prawdopodobnie przydatne jest uwzględnienie wielu filtrów. Na przykład można używać tokenów do wyszukiwania wielu terminów w tekście. Coś, co zawiera "crazy" i zawiera "world", na przykład, to była by ta pozycja. Chociaż na iOS mamy wyszukiwanie, myślę, że na macOS jest to jeszcze ważniejsze. To narzędzie do pracy, prawdopodobnie masz dużo danych, notatek, naprawdę chcesz pozwolić użytkownikowi na bardziej precyzyjne wyszukiwanie. 
 
 ### Skróty klawiszowe
 
