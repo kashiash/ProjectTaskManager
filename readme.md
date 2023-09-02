@@ -8,7 +8,13 @@ Chcesz stworzyć aplikację na platformę Mac, ale nie wiesz, od czego zacząć?
 
 
 
-Teraz, jeśli chodzi o macOS, zazwyczaj masz pasek boczny z widokiem szczegółowym lub kilkoma kolumnami. W tym przypadku jest to specyficzny widok, który nazywa się nawigacyjnym podziałem widoku, który będziemy używać. Dodałem tu trzy grupy: "Wszystkie", "Zrobione zadania" i "Zadania nadchodzące". Dodatkowo, jako test, dodałem możliwość dodawania list lub grup, ponieważ wiąże się to z trochę bardziej zaawansowaną obsługą danych. Postaram się to bardzo uprościć. W sekcji "Wszystkie" będziesz mógł oznaczać zadania jako wykonane lub odznaczać je. Możesz również je tutaj edytować. Kilka bardziej specyficznych rzeczy związanych z macOS to na przykład skróty klawiszowe. Dodałem tutaj jeden dla opcji "Nowa lista". Jeśli naciśniesz Command + A, zobaczysz, że dodaję nową listę. Po prostu coś dodałem. Coś takiego jak prawy przycisk myszy do usuwania, kopiowania lub zmiany nazwy akcji. Jest to bardzo podobne do menu rozwijanego lub okienka kontekstowego. W przypadku macOS wiele opcji jest dostępnych na pasku narzędzi. Tutaj dodałem przycisk plus do tworzenia nowego zadania. Jest także pasek wyszukiwania, dzięki któremu możesz wyszukiwać zadania zawierające słowo "crazy". Następnie możesz go zamknąć i zobaczyć wszystkie zadania ponownie. Istnieje wiele zaawansowanych funkcji wyszukiwania, których nie będę omawiał w tym samouczku. W opisie zamieszczę wiele innych samouczków, bo nie chcę przytłaczać cię wszystkimi funkcjami od razu, ale dostajesz ogólne pojęcie, gdzie co dodać i na co zwrócić uwagę. Inne rzeczy, które mogą cię zainteresować, to na przykład dodawanie menu. W tym przypadku dodałem nowe menu dla zadań, ale nie podłączyłem przycisku do niego. To trochę trudniejsze w SwiftUI, ale dodali pewne nowe funkcje, które teraz umożliwiają to w miarę łatwo. Dodałem tutaj także drugi typ okna z przykładowym tekstem.
+Teraz, jeśli chodzi o macOS, zazwyczaj masz pasek boczny z widokiem szczegółowym lub kilkoma kolumnami. W tym przypadku jest to specyficzny widok, który nazywa się nawigacyjnym podziałem widoku, który będziemy używać.
+
+![2023-09-02_13-55-32 (1)](2023-09-02_13-55-32%20(1).gif)
+
+
+
+ Dodałem tu trzy grupy: "Wszystkie", "Zrobione zadania" i "Zadania nadchodzące". Dodatkowo, jako test, dodałem możliwość dodawania list lub grup, ponieważ wiąże się to z trochę bardziej zaawansowaną obsługą danych. Postaram się to bardzo uprościć. W sekcji "Wszystkie" będziesz mógł oznaczać zadania jako wykonane lub odznaczać je. Możesz również je tutaj edytować. Kilka bardziej specyficznych rzeczy związanych z macOS to na przykład skróty klawiszowe. Dodałem tutaj jeden dla opcji "Nowa lista". Jeśli naciśniesz Command + A, zobaczysz, że dodaję nową listę. Po prostu coś dodałem. Coś takiego jak prawy przycisk myszy do usuwania, kopiowania lub zmiany nazwy akcji. Jest to bardzo podobne do menu rozwijanego lub okienka kontekstowego. W przypadku macOS wiele opcji jest dostępnych na pasku narzędzi. Tutaj dodałem przycisk plus do tworzenia nowego zadania. Jest także pasek wyszukiwania, dzięki któremu możesz wyszukiwać zadania zawierające słowo "crazy". Następnie możesz go zamknąć i zobaczyć wszystkie zadania ponownie. Istnieje wiele zaawansowanych funkcji wyszukiwania, których nie będę omawiał w tym samouczku. W opisie zamieszczę wiele innych samouczków, bo nie chcę przytłaczać cię wszystkimi funkcjami od razu, ale dostajesz ogólne pojęcie, gdzie co dodać i na co zwrócić uwagę. Inne rzeczy, które mogą cię zainteresować, to na przykład dodawanie menu. W tym przypadku dodałem nowe menu dla zadań, ale nie podłączyłem przycisku do niego. To trochę trudniejsze w SwiftUI, ale dodali pewne nowe funkcje, które teraz umożliwiają to w miarę łatwo. Dodałem tutaj także drugi typ okna z przykładowym tekstem.
 
 Możesz również używać prawego przycisku myszy, aby otworzyć nowe okno. W macOS 13 wprowadzono wiele ulepszeń, dzięki czemu programistyczne otwieranie nowego okna jest dość proste. Co więcej, każda aplikacja na Macu powinna mieć okno ustawień. To jest to, gdy idziesz pod swoje imię, w ustawieniach otwierasz to. Nie podłączyłem jeszcze niczego. Jedną rzeczą, którą możesz chcieć podłączyć, jest możliwość dodania paska menu. Tutaj dodałem bardzo prosty. Bardziej interesujące jest na przykład to, co widzisz w jednym z menedżerów zadań, które pobrałem, np. "Tick Tick". Masz tutaj wszystkie ostatnie zadania bezpośrednio dostępne, co jest bardzo przydatne. Inne rzeczy, które mogą cię zainteresować, to na przykład dodawanie widżetów. Nie zapisuję żadnych danych, więc to są naprawdę tylko dane testowe, ale w przyszłym filmie dodam trwałe dane i będziemy używać Core Data. To jest przydatne zwłaszcza w przypadku zaawansowanego wyszukiwania, jeśli chcesz dodawać tagi, filtrować według daty itp. Łatwo to zrobić z Core Data. Dodatkowo, jeśli używasz Core Data w połączeniu z synchronizacją iCloud, możesz pozwolić użytkownikom synchronizować dane między różnymi urządzeniami. O ile pozostaniesz w ekosystemie Apple, wielu użytkowników prawdopodobnie korzysta z jednego lub drugiego urządzenia. Nie wiem, czy jest wielu użytkowników Androida i Maca, ponieważ stworzyli połączony ekosystem. Teraz, gdy masz pojęcie o tym, jaką aplikację na macOS zamierzasz stworzyć, przejdźmy do kodowania i stworzenia nowego projektu. Użyję tu szablonu projektu macOS do aplikacji. Jeśli wiesz, że chcesz także mieć aplikację towarzyszącą na iOS lub iPadOS, możesz wybrać opcję "Wieloplatformowy". Jest to również bardzo dobry pomysł, jeśli chcesz później dodać subskrypcje uniwersalne, ponieważ wtedy możesz mieć subskrypcję współdzieloną między iOS a macOS. Ja wybiorę macOS, żeby było trochę łatwiej. Nazwę to "Task Manager". Interfejs to SwiftUI, język to Swift. Nie używam żadnego przechowywania.
 
@@ -259,7 +265,6 @@ enum TaskSection: Identifiable,CaseIterable,Hashable {
     static func == (lhs: TaskSection, rhs: TaskSection) -> Bool {
         lhs.id == rhs.id
     }
-
 }
 ```
 
@@ -293,39 +298,189 @@ struct TaskListView_Previews: PreviewProvider {
 
 
 
-Główną rzeczą, którą chcę tutaj pokazać, to zadania, więc muszę mieć tablicę moich danych. `let tasks` to tablica zadań. I także tytuł, łańcuch znaków. Teraz w moim podglądzie, na przykład, chcę pokazać wszystko. Teraz używam przykładów zadań. To jest ta tablica. Główną treścią jest lista zadan, `Task in`. Więc tutaj pokazałbym tekst z tytułem zadania. To są domyślne wartości, które utworzyłem. Oprócz tekstu chcę także pokazać ikonę, jeśli to jest zrobione zadanie lub nie. `Image(systemName:)`. Spójrzmy na bibliotekę Xcode i ikony, to jest ikona koła. Więc mogę po prostu użyć zwykłego koła, a my chcemy przełączyć się i zdecydować, co pokazać w zależności od tego, czy zadanie jest ukończone, znak zapytania. Jeśli jest ukończone, chcę pokazać inne, mogę użyć `.circle.fill`, `.circle`. Teraz mamy dwie różne ikony tutaj. Dobra, zostawmy to na razie, a będziemy dodawać interaktywne modyfikacje później, gdzie użytkownik może zmieniać tekst i flagę logiczną, czy jest ukończone, czy nie. Przejdźmy do widoku bocznego, więc znowu zaczynam od listy. Jedna rzecz, którą zdecydowanie chcę pokazać, to selekcja zadań. `All cases`. `Selection in`. Używam etykiety, ponieważ już dodałem informacje o nazwie wyświetlanej w selekcji i nazwie ikony w selekcji.
+Główną rzeczą, którą chcę tutaj pokazać, to zadania, więc muszę mieć tablicę moich danych. `let tasks` to tablica zadań. I także tytuł, łańcuch znaków. Teraz w moim podglądzie, na przykład, chcę pokazać wszystko. Teraz używam przykładów zadań. To jest ta tablica. Główną treścią jest lista zadan, `Task in`. Więc tutaj pokazałbym tekst z tytułem zadania. To są domyślne wartości, które utworzyłem. Oprócz tekstu chcę także pokazać ikonę, jeśli to jest zrobione zadanie lub nie. `Image(systemName:)`. Spójrzmy na bibliotekę Xcode i ikony, to jest ikona koła. Mogę użyć `.circle.fill`, `.circle`. Teraz mamy dwie różne ikony tutaj. Dobra, zostawmy to na razie, a będziemy dodawać interaktywne modyfikacje później, gdzie użytkownik może zmieniać tekst i flagę logiczną, czy jest ukończone, czy nie. 
 
 
 
-> *Okay. Now we have here this three icons If you want to see this more in the sidebar style you can in the preview add a list sidebar. When we put this together in the navigation split view this would be applied automatically. The next thing I want to actually show here is the user created groups. So let user created groups task group is an array of task group. Adding in this in the preview task group.xrpels, so it's an array. Because now I have here another data for each user created task groups. Group in. And let's also use a label with title and this is the group's title. And the system name is folder. Now everything is shown together in one list. If you want to have sections with a title, This is, for example, favorites. I am using the for each as the content of each of the section. And then another section for the user-created ones, your groups. The next thing I want to actually do is select something here. List has a selection property and I need to have a state property for this. A state private var selection task selection. for example, you can start with all cases. Then I use the selection property with a binding now here to my selection. This is not working because sometimes it doesn't recognize the selection, so I need to add here a tag with the selection. See, now you can select something. I also have to do this with the second section. So this is a tag with my task selection. I use here list type and use this group. I probably should not have made listing groups so interchangeable. Okay now this is good we can select something here and I want to now bring everything together in the content view with a navigation split view with sidebar and detail. So the sidebar is the sidebar view and the detail is the task list view. As you see I need to have here some data that I'm showing. I am going to create another property here for this user created groups. Paid state private bar user created and again I'm using here my dummy data. Then for my task list view I need to change what I'm showing here depending on what I actually selected in the sidebar view. In order to know this I actually need to have the selection. So I need to pass this information one level higher which means that it cannot be here a state. I have to change this binding. I'm going to copy this because I need this anyway. So this becomes a binding var selection of type task selection. Changing this in the preview. Constant of all. Going back to the content view. Now here I paste in my selection state that I get here. So binding selection.*
+Przejdźmy do widoku bocznego, więc znowu zaczynam od listy.
+
+```swift
+struct SidebarView: View {
+    let userCreatedGroups: [TaskGroup]
+    @State private var selection = TaskSection.all
+
+    var body: some View {
+        List(selection: $selection) {
+            Section("Favorites") {
+                ForEach(TaskSection.allCases) {
+                    selection in
+                    Label(selection.displayName, systemImage: selection.iconName)
+                        .tag(selection)
+                }
+            }
+            Section("Your groups") {
+                ForEach(userCreatedGroups) { group in
+                    Label(group.title, systemImage: "folder")
+                        .tag(TaskSection.list(group))
+                }
+            }
+        }
+    }
+}
+
+struct SidebarView_Previews: PreviewProvider {
+    static var previews: some View {
+        SidebarView(userCreatedGroups: TaskGroup.examples())
+    }
+}
+```
+
+ Jedna rzecz, którą zdecydowanie chcę pokazać, to selekcja zadań. `All cases`. `Selection in`. Używam etykiety, ponieważ już dodałem informacje o nazwie wyświetlanej w selekcji i nazwie ikony w selekcji. Teraz mamy tu trzy ikony. Jeśli chcesz zobaczyć to bardziej w stylu bocznego paska, możesz w podglądzie dodać pasek boczny. Gdy połączymy to razem w podziale nawigacyjnym, zostanie to automatycznie zastosowane. Kolejną rzeczą, którą chcę tu faktycznie pokazać, są grupy utworzone przez użytkownika. Dlatego grupy utworzone przez użytkownika to tablica grup zadań. Dodaj to w podglądzie, taskGroup.examples, więc to jest tablica. Ponieważ teraz mam tutaj inne dane dla każdej grupy zadań utworzonych przez użytkownika. Grupa w. I użyjmy również etykiety z tytułem, który jest tytułem grupy. A nazwa systemu to folder. Teraz wszystko jest wyświetlane razem w jednym zestawieniu. Jeśli chcesz mieć sekcje z tytułem, to jest na przykład ulubione. Używam "forEach" jako zawartość każdej z sekcji. A potem kolejna sekcja dla grup utworzonych przez użytkownika, twoje grupy. Następną rzeczą, którą chcę teraz zrobić, to wybrać coś tutaj. Lista ma właściwość "selection", i muszę mieć stanową właściwość do tego. Stanową prywatną zmienną wybór, na przykład taskSelection. Możesz zacząć od przypadku "all cases". Następnie używam właściwości "selection" z wiązaniem, teraz tutaj do mojego wyboru. To nie działa, ponieważ czasami nie rozpoznaje wyboru, więc muszę dodać tutaj znacznik z wyborem. Teraz możesz coś wybrać. Muszę to również zrobić w przypadku drugiej sekcji. Więc to jest znacznik z wyborem "taskSelection". Używam tutaj typu listy i używam tej grupy. Prawdopodobnie nie powinienem pozwolić na zamianę grup. Teraz to jest ok, możemy coś wybrać tutaj, i chcę teraz połączyć wszystko w widoku zawartości z nawigacyjnym podziałem na panel boczny i szczegóły. Tak więc panel boczny to widok panelu bocznego, a szczegóły to widok listy zadań. Jak widzisz, muszę mieć tutaj pewne dane, które pokazuję. Chcę utworzyć kolejną właściwość tutaj dla tych grup utworzonych przez użytkownika. Stanowa prywatna zmienna userCreated i ponownie używam tutaj moich danych testowych. Następnie w widoku listy zadań muszę zmienić to, co tutaj pokazuję, w zależności od tego, co faktycznie wybrałem w widoku panelu bocznego. Aby to wiedzieć, muszę właściwie przekazać tę informację o jeden poziom wyżej, co oznacza, że nie może to być tutaj stanem. Muszę zmienić to wiązanie.Więc staje się to wiązaniem var selection typu task selection. Zmieniając to w podglądzie. Stałe "all". Wracając do widoku zawartości. Teraz tutaj wklejam moje wiązanie wyboru, które dostaję tutaj. Więc wiązanie do wyboru.
+
+```swift
+struct ContentView: View {
+
+    @State private var selection = TaskSection.all
+    @State private var allTasks = Task.examples()
+    @State private var userCreatedGroups = TaskGroup.examples()
+    
+    var body: some View {
+        NavigationSplitView{
+            SidebarView(userCreatedGroups: userCreatedGroups,selection: $selection)
+        } detail: {
+            switch selection {
+            case .all:
+                TaskListView(title: "All", tasks: allTasks)
+            case .done:
+                TaskListView(title:"Done", tasks: allTasks.filter({ $0.isCompleted }))
+            case .upcoming:
+                TaskListView(title: "Upcoming", tasks: allTasks.filter({$0.isCompleted == false }))
+
+            case .list(let taskGroup):
+
+                TaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+```
+
+Teraz, co do szczegółów. To zależy od tego, co wybrałem tutaj. Używam instrukcji wyboru switch. Jeśli mam listę, mogę jej użyć i użyć tytułu grupy zadań i zadań grupy zadań. Teraz muszę pokazać ci coś dla wszystkich, zrobionych i nadchodzących. Nie chcę robić tego zbyt skomplikowanego, więc zamierzam oszukać system i pokazać trochę danych testowych. Więc definiujemy : @state private var allTasks, a to moja tablica przykładowych zadań. Widok listy zadań dla wszystkich, pokazując wszystkie zadania. W przypadku dwóch pozostałych przypadków zamierzam to przefiltrować. To naprawdę tylko dla naszego projektu demonstracyjnego. Nie chcę tego zbyt komplikować, więc tutaj filtruję to, mówiąc, że tylko jeśli zadanie jest zakończone, a w przypadku nadchodzących również to filtrowanie, ale mówiąc, że nie jest zakończone. Przetestujmy to. W przypadku "all" widzę wszystko zrobione. Widzę te zrobione, ponieważ mają kropkę, a nadchodzące to te, które nie są zakończone. Następnie przechodząc do "personal" jest ta, którą stworzyłem, a pozostałe nie mają żadnych. Więc to wygląda na jakieś działające. Już coś widać w naszym programie. 
 
 
 
-Okej. Teraz mamy tu trzy ikony. Jeśli chcesz zobaczyć to bardziej w stylu bocznego paska, możesz w podglądzie dodać pasek boczny. Gdy połączymy to razem w podziale nawigacyjnym, zostanie to automatycznie zastosowane. Kolejną rzeczą, którą chcę tu faktycznie pokazać, są grupy utworzone przez użytkownika. Dlatego grupy utworzone przez użytkownika to tablica grup zadań. Dodaj to w podglądzie, taskGroup.examples, więc to jest tablica. Ponieważ teraz mam tutaj inne dane dla każdej grupy zadań utworzonych przez użytkownika. Grupa w. I użyjmy również etykiety z tytułem, który jest tytułem grupy. A nazwa systemu to folder. Teraz wszystko jest wyświetlane razem w jednym zestawieniu. Jeśli chcesz mieć sekcje z tytułem, to jest na przykład ulubione. Używam "forEach" jako zawartość każdej z sekcji. A potem kolejna sekcja dla grup utworzonych przez użytkownika, twoje grupy. Następną rzeczą, którą chcę teraz zrobić, to wybrać coś tutaj. Lista ma właściwość "selection", i muszę mieć stanową właściwość do tego. Stanową prywatną zmienną wybór, na przykład taskSelection. Możesz zacząć od przypadku "all cases". Następnie używam właściwości "selection" z wiązaniem, teraz tutaj do mojego wyboru. To nie działa, ponieważ czasami nie rozpoznaje wyboru, więc muszę dodać tutaj znacznik z wyborem. Teraz możesz coś wybrać. Muszę to również zrobić w przypadku drugiej sekcji. Więc to jest znacznik z wyborem "taskSelection". Używam tutaj typu listy i używam tej grupy. Prawdopodobnie nie powinienem pozwolić na zamianę grup. Teraz to jest dobre, możemy coś wybrać tutaj, i chcę teraz połączyć wszystko w widoku zawartości z nawigacyjnym podziałem na panel boczny i szczegóły. Tak więc panel boczny to widok panelu bocznego, a szczegóły to widok listy zadań. Jak widzisz, muszę mieć tutaj pewne dane, które pokazuję. Chcę utworzyć kolejną właściwość tutaj dla tych grup utworzonych przez użytkownika. Stanowa prywatna zmienna userCreated i ponownie używam tutaj moich danych testowych. Następnie w widoku listy zadań muszę zmienić to, co tutaj pokazuję, w zależności od tego, co faktycznie wybrałem w widoku panelu bocznego. Aby to wiedzieć, muszę właściwie przekazać tę informację o jeden poziom wyżej, co oznacza, że nie może to być tutaj stanem. Muszę zmienić to wiązanie. Skopiuję to, ponieważ i tak tego potrzebuję. Więc staje się to wiązaniem var selection typu task selection. Zmieniając to w podglądzie. Stałe "all". Wracając do widoku zawartości. Teraz tutaj wklejam moje wiązanie wyboru, które dostaję tutaj. Więc wiązanie do wyboru.
+![2023-09-02_13-55-32 (1)](2023-09-02_13-55-32%20(1)-3655983.gif)
 
->  *Now for the detail. It depends what I selected here. So I use a switch selection statement. If I have a list I can use this and use the task groups title and the task groups tasks. Now I need to show you something for all done and upcoming. I don't really want to make this too complicated so I'm going to trick the system and show some dummy data. So @state private var all tasks and this is my examples array. So task list view all by showing all tasks. Then in the other two cases I'm going to filter this. This is really just for our demo project. I don't want to make this too complicated so I'm filtering this here by saying only if the task is completed and the upcoming I'm also doing this filtering but by saying it's not completed. Let's test this. In the old case I see everything done. I see the done ones because it has a dot and upcoming as the not done ones. And then going to personal this is the one that I create the other ones and the new list doesn't have any. So this is looking somewhat working. We have some information showing. Let's now add a little bit more interaction. And the first one is here in my sidebar I want to add a button where it says new list. Which means in my sidebar list view here I need to add this on the bottom. If you add this in the list it will be in the end of the list but if you add more groups then it just the user wants I want to make sure the user always sees it and not just when they're scrolling. So I'm not adding this inside the list I'm using a trick to use the safe area insets. safeAreaInsetEdgeButton on iOS you have a toolbar placement of button bar but on macOS we don't have this. Okay let's add a button action and label so it's down there and the label title and add group with a plus dot circle. Now macOS per default adds a border and a background to the button styles. You can change this to by using a button style of borderless. This is now gray and then I can change the foreground color to the accent color which I is using here the default one. If you want to change this you can just go in the assets catalog choosing this and going for this kind of color. If I look at the preview in the content view you see it is very much on the bottom. I'm going to use the pin function of the preview. So this is this which means even if I move to the sidebar view I still have this preview you can always go back to just the sidebar. This is nicer to do. So I'm adding here padding and I actually want to move this to the leading edge. So I use an f-frame maximum width of infinity with an alignment of leading.* 
+Teraz dodajmy trochę więcej interakcji. Pierwsza z nich to tutaj w moim panelu bocznym chcę dodać przycisk, dodowania grup zadań.. Co oznacza, że w moim widoku listy panelu bocznego muszę to dodać na dole. Jeśli dodasz to do listy, pojawi się na końcu listy, ale jeśli dodasz więcej grup, tak jak chce użytkownik, chcę się upewnić, że użytkownik zawsze je widzi i nie tylko wtedy, gdy przewijają. Więc nie dodaję tego do listy, używam sztuczki, żeby użyć wcięć w obszarze bezpiecznym. `safeAreaInsetEdgeButton` na iOS masz umieszczenie paska narzędziowego na pasku przycisków, ale na macOS tego nie mamy. Dobra, dodajmy przycisk, akcję i etykietę, więc jest tam na dole, a etykieta to "title" i "add group" z plusem i kropką w okręgu. Teraz macOS domyślnie dodaje ramkę i tło do stylów przycisków. Możesz to zmienić, korzystając ze stylu przycisku "borderless". Teraz jest to szare, a następnie mogę zmienić kolor tekstu na zdefiniowany w assets kolor .accentColor. Dodaję tutaj margines, i tak naprawdę chcę to przenieść na początkową krawędź. Więc używam f-frame o maksymalnej szerokości nieskończoności z wyrównaniem do lewej krawędzi.
+
+```swift
+    List {...}    
+        .safeAreaInset(edge: .bottom) {
+            Button(action: {
+              let newGroup = TaskGroup(title: "Nowa Grupa")
+                userCreatedGroups.append(newGroup)
+            }, label: {
+                Label("Add Group",systemImage: "plus.circle")
+            })
+            .buttonStyle(.borderless)
+            .foregroundColor(.accentColor)
+            .padding()
+            .frame(maxWidth: .infinity,alignment: .leading)
+        }
+```
+
+Jeśli chcesz to zmienić, możesz po prostu przejść do katalogu zasobów i wybrać ten kolor. Jeśli spojrzysz na podgląd w widoku zawartości, zobaczysz, że jest to na samym dole. Użyję funkcji przypinania podglądu. To jest to, co oznacza, że nawet jeśli przejdę do widoku panelu bocznego, nadal mam ten podgląd, zawsze można wrócić tylko do panelu bocznego. 
+
+
+
+![image-20230902141515454](image-20230902141515454.png)
 
 
 
 
 
-Teraz, co do szczegółów. To zależy od tego, co wybrałem tutaj. Używam instrukcji wyboru switch. Jeśli mam listę, mogę jej użyć i użyć tytułu grupy zadań i zadań grupy zadań. Teraz muszę pokazać ci coś dla wszystkich, zrobionych i nadchodzących. Nie chcę robić tego zbyt skomplikowanego, więc zamierzam oszukać system i pokazać trochę danych testowych. Więc @state private var allTasks, a to moja tablica przykładów. Widok listy zadań dla wszystkich, pokazując wszystkie zadania. W przypadku dwóch pozostałych przypadków zamierzam to przefiltrować. To naprawdę tylko dla naszego projektu demonstracyjnego. Nie chcę tego zbyt komplikować, więc tutaj filtruję to, mówiąc, że tylko jeśli zadanie jest zakończone, a w przypadku nadchodzących również to filtrowanie, ale mówiąc, że nie jest zakończone. Przetestujmy to. W przypadku "all" widzę wszystko zrobione. Widzę te zrobione, ponieważ mają kropkę, a nadchodzące to te, które nie są zakończone. Następnie przechodząc do "personal" jest ta, którą stworzyłem, a pozostałe nie mają żadnych. Więc to wygląda na jakieś działające. Mamy tu trochę informacji. Teraz dodajmy trochę więcej interakcji. Pierwsza z nich to tutaj w moim panelu bocznym chcę dodać przycisk, na którym pisze "new list". Co oznacza, że w moim widoku listy panelu bocznego muszę to dodać na dole. Jeśli dodasz to do listy, pojawi się na końcu listy, ale jeśli dodasz więcej grup, tak jak chce użytkownik, chcę się upewnić, że użytkownik zawsze je widzi i nie tylko wtedy, gdy przewijają. Więc nie dodaję tego do listy, używam sztuczki, żeby użyć wcięć w obszarze bezpiecznym. safeAreaInsetEdgeButton na iOS masz umieszczenie paska narzędziowego na pasku przycisków, ale na macOS tego nie mamy. Dobra, dodajmy przycisk, akcję i etykietę, więc jest tam na dole, a etykieta to "title" i "add group" z plusem i kropką w okręgu. Teraz macOS domyślnie dodaje ramkę i tło do stylów przycisków. Możesz to zmienić, korzystając ze stylu przycisku "borderless". Teraz jest to szare, a następnie mogę zmienić kolor tekstu na kolor akcentu, który jest domyślny. Jeśli chcesz to zmienić, możesz po prostu przejść do katalogu zasobów i wybrać ten kolor. Jeśli spojrzysz na podgląd w widoku zawartości, zobaczysz, że jest to na samym dole. Użyję funkcji przypinania podglądu. To jest to, co oznacza, że nawet jeśli przejdę do widoku panelu bocznego, nadal mam ten podgląd, zawsze można wrócić tylko do panelu bocznego. To jest miłe do zrobienia. Więc dodaję tutaj margines, i tak naprawdę chcę to przenieść na początkową krawędź. Więc używam f-frame o maksymalnej szerokości nieskończoności z wyrównaniem do lewej krawędzi.
+Teraz rozmieszczenie jest świetne. Mam ładne style, ale to, co naprawdę chcę zrobić, to zrobić to porządnie. Powiedzmy, że tworzę tutaj nową grupę, a użytkownik naciska, tworząc grupę zadań , a następnie muszę to przypiąć do listy, którą pokazuję tutaj, do widoków utworzonych przez użytkownika. "Widok utworzony przez użytkownika" "Grupy zadań" "Dodaj moją nową grupę". 
+
+```swift
+              let newGroup = TaskGroup(title: "Nowa Grupa")
+                userCreatedGroups.append(newGroup)
+```
 
 
 
-> *Okay now the placement is great. I have the nice styling but what I actually want to do is do this properly. So let's say I I create here a new group and the user presses by creating a task group with "Titanial group" and then I need to attach this to the list that I'm showing here to the user created views. "User created view" "Task groups" "Append my new group" This is complaining because it's not mutating. Yeah and in order to make this mutating I need to again here use a binding so similar "@binding" bar. We have to change this in for all of the initializers. So here I have to now use a constant for the binding, creating a new binding. And in the content view I also have to pass this as a binding now. Okay, let's try. I press here on add group and it is changed. And we create here new groups. Now in order to actually modify them, in the sidebar view here I need to instead of just showing a label, I want to show a text field. So I am creating a H stack with an image, I still want to show the image, a folder and then a text field group with a binding to the group's title. Now this is going to cause problems because I don't have a year binding currently in this for each so we have to modify this by saying the for each works with a binding to users user created groups and then I get here the binding back okay go see okay sometimes the preview doesn't want to clean clean task okay now when I tap twice I can enter the text field and change the type it doesn't continuously change it here and there this preview I I need to go to the content view. It's because I used the constant. So I add a new group, changed. Now this is working properly. I am going to add here a keyboard shortcut in a little while, when we talk more specifically about the macro stuff. Before that, I want to make this list here editable. And because in the content view, I'm passing this here with this switch case in this election, this is a little bit more complicated to do the filtering. So I'm going to create a second version of the task list view. I was thinking of using the new observation framework, but then again, if you run this on Mac OS, you need to have the newer Mac OS 14 installed, and I'm not sure if you have. It's probably safe, it was safer this way. And then since I'm going to in the future use Core Data, this is going to be a lot easier, you will see. One of the reasons why Core Data is nice in this case. Okay, so this task list here is just going to be the static one. I am going to refactor and rename this to static task list view. And then we're creating a new one for task list view. Similar to before, I'm going to copy the contents. Now, one of the differences is that I want to change, edit my task here. So this needs to become a add binding var. Then we need to change this in here.* 
+To skarży się, bo nie jest mutowane. Tak, żeby to zmutować, muszę znowu tutaj użyć bindingu, więc podobnie "@binding" bar. 
+
+```swift
+struct SidebarView: View {
+    
+    @Binding var userCreatedGroups: [TaskGroup]
+  ...
+```
+
+Musimy to zmienić we wszystkich konstruktorach. Tutaj muszę teraz użyć stałej dla bindingu, tworząc nowy binding. I w widoku zawartości muszę `$userCreatedGroups` też przekazać jako binding.
+
+```swift
+struct ContentView: View {
+		...
+    
+    var body: some View {
+        NavigationSplitView{
+            SidebarView(userCreatedGroups: $userCreatedGroups,selection: $selection)
+        } detail: {
+    ...
+```
+
+Sprawdźmy. Naciskam tutaj na "dodaj grupę" i jest zmienione. Tworzymy tu nowe grupy. 
+
+![2023-09-02_14-27-56 (1)](2023-09-02_14-27-56%20(1).gif)
+
+Teraz, aby móc zmodyfikować nazwe grupu, w widoku panelu bocznego tutaj zamiast tylko pokazywać etykietę, chcę pokazać pole tekstowe. Więc tworzę H stack z obrazem, chcę nadal pokazać obraz, folder i następnie pole tekstowe grupy z bindingiem do tytułu grupy. Teraz to spowoduje problemy, ponieważ nie mam jeszcze bindingu w tym for each, więc musimy to zmodyfikować, mówiąc, że for each działa z bindingiem do grup utworzonych przez użytkownika,  `ForEach($userCreatedGroups) { $group in`. 
+
+```swift
+struct SidebarView: View {
+    ...
+        List(selection: $selection) {
+          ...
+								Section("Your groups") {
+                ForEach($userCreatedGroups) { $group in
+                    HStack{
+                        Image(systemName: "folder")
+                        TextField("Grupa",text: $group.title)
+                    }
+                        .tag(TaskSection.list(group))
+                }
+            }
+```
 
 
 
-Teraz rozmieszczenie jest świetne. Mam ładne style, ale to, co naprawdę chcę zrobić, to zrobić to porządnie. Powiedzmy, że tworzę tutaj nową grupę, a użytkownik naciska, tworząc grupę zadań z "Titanial group", a następnie muszę to przypiąć do listy, którą pokazuję tutaj, do widoków utworzonych przez użytkownika. "Widok utworzony przez użytkownika" "Grupy zadań" "Dodaj moją nową grupę". To skarży się, bo nie jest mutowane. Tak, żeby to zmutować, muszę znowu tutaj użyć bindingu, więc podobnie "@binding" bar. Musimy to zmienić we wszystkich konstruktorach. Tutaj muszę teraz użyć stałej dla bindingu, tworząc nowy binding. I w widoku zawartości muszę to też przekazać jako binding. Sprawdźmy. Naciskam tutaj na "dodaj grupę" i jest zmienione. Tworzymy tu nowe grupy. Teraz, aby to naprawdę zmodyfikować, w widoku panelu bocznego tutaj zamiast tylko pokazywać etykietę, chcę pokazać pole tekstowe. Więc tworzę H stack z obrazem, chcę nadal pokazać obraz, folder i następnie pole tekstowe grupy z bindingiem do tytułu grupy. Teraz to spowoduje problemy, ponieważ nie mam jeszcze bindingu w tym for each, więc musimy to zmodyfikować, mówiąc, że for each działa z bindingiem do grup utworzonych przez użytkownika, a potem dostaję tutaj binding z powrotem. Okej, działa. Czasami podgląd nie chce się wyczyścić. Dobra, teraz, gdy dwukrotnie naciśnę, mogę wejść do pola tekstowego i zmienić typ. Nie zmienia się ciągle tutaj i tam w tym podglądzie. Muszę przejść do widoku zawartości. To dlatego, że użyłem stałej. Więc dodaję nową grupę, zmieniam. Teraz to działa prawidłowo. Za chwilę dodam tu skrót klawiaturowy, kiedy porozmawiamy bardziej szczegółowo o rzeczach specyficznych dla macOS. Przed tym chcę, żeby ta lista była edytowalna. I ponieważ w widoku zawartości przekazuję to tutaj z tym przełącznikiem w tym selekcjonowaniu, jest to trochę bardziej skomplikowane do wykonania filtrowania. Więc zamierzam stworzyć drugą wersję widoku listy zadań. Myślałem o użyciu nowej ramy obserwacji, ale z drugiej strony, jeśli uruchamiasz to na macOS, musisz mieć zainstalowany nowy macOS 14, i nie jestem pewien, czy masz. To jest prawdopodobnie bezpieczniejsze w ten sposób. A potem, ponieważ zamierzam w przyszłości używać Core Data, to będzie o wiele łatwiejsze, zobaczysz. Jednym z powodów, dla których Core Data jest w tym przypadku przydatne. Okej, więc ta lista zadań tutaj będzie tylko statyczna. Zamierzam zmienić i zmienić nazwę na statyczną listę zadań. A potem tworzymy nową listę dla widoku listy zadań. Podobnie jak wcześniej, skopiuję zawartość. Teraz jedną z różnic jest to, że chcę zmieniać i edytować swoje zadanie tutaj. Więc to musi stać się dodatkowym bindingiem var. Następnie musimy to zmienić tutaj.
+Czasami podgląd nie chce się wyczyścić. Dobra, teraz, gdy dwukrotnie naciśnę, mogę wejść do pola tekstowego i zmienić typ. Nie zmienia się ciągle tutaj i tam w tym podglądzie. Muszę przejść do widoku zawartości. To dlatego, że użyłem stałej. Więc dodaję nową grupę, zmieniam. Teraz to działa prawidłowo. Za chwilę dodam tu skrót klawiaturowy, kiedy porozmawiamy bardziej szczegółowo o rzeczach specyficznych dla macOS. Przed tym chcę, żeby ta lista była edytowalna. I ponieważ w widoku zawartości przekazuję to tutaj z tym przełącznikiem w tym selekcjonowaniu, jest to trochę bardziej skomplikowane do wykonania filtrowania. Więc zamierzam stworzyć drugą wersję widoku listy zadań. Myślałem o użyciu nowego atrybutu Observable, ale z drugiej strony, jeśli uruchamiasz to na macOS, musisz mieć zainstalowany nowy macOS 14, i nie jestem pewien, czy masz. To jest prawdopodobnie bezpieczniejsze w ten sposób. A potem, ponieważ zamierzam w przyszłości używać Core Data, to będzie o wiele łatwiejsze, zobaczysz. Jednym z powodów, dla których Core Data jest w tym przypadku przydatne. Okej, więc ta lista zadań tutaj będzie tylko statyczna. Zmieniamy poprzez Refactor/Rename TaskListView na StaticTaskListView. A potem tworzymy TaskListView dla widoku listy zadań. Kopiujemy zawartość z pierwotnej metody. Teraz jedną z różnic jest to, że chcę zmieniać i edytować swoje zadanie. Więc lista zadań  musi stać się zmienną z atrybutem bindug:   `@Binding var tasks: [Task]`. Następnie musimy to zmienić tutaj.
+
+Teraz pierwszą rzeczą, którą chcę zrobić, to możliwość dodawania nowych zadań. Wykorzystuję pasek narzędzi do dodania przycisku. Akcja i etykieta z etykietą "Dodaj nowe zadanie". Ikona to plus. Domyślnie jest wyświetlana z prawej strony okna. 
+
+```swift
+        List(tasks){...}
+        .toolbar {
+            Button {
+
+            } label: {
+                Label("Nowe zadanie", systemImage: "plus")
+            }
+        }
+```
+
+Teraz działanie, które chcę wykonać, to tutaj zadania, dołączanie nowego zadania. To nie działa w podglądzie, ponieważ mam tutaj stałą tablicę, więc nie mogę jej modyfikować. Aby to zobaczyć, muszę użyć widoku listy zadań dla widoku zawartości. Ze względu na to filtrowanie, nie mogę go użyć w innych przypadkach tutaj, ale mogę go użyć w przypadku wszystkich, all. Następnie używając tu binding do wszystkich zadań. Jeśli przejdziesz teraz do wyboru wszystkich, mamy ten przycisk plus. I kiedy dodasz tutaj jedno, to się pojawia. Później, być może będziesz musiał wykonać jakieś programistyczne przewijanie, inaczej użytkownik tego nie zobaczy, lub też zarządzanie fokusem, o czym nie będę mówił. Możesz aktywować pole tekstowe. Zanim jednak będziemy mieli to pole tekstowe, ten focus, muszę przenieść się z etykiety tutaj do tekstu. Chcę faktycznie zmodyfikować to, co mam tutaj. Dlatego też utworzę nowy podwidok. To nowy plik widoku zadania. Chcę w nim coś zmodyfikować. Musi to być ponownie binding var task. A potem w podglądzie, tworzymy stałą. Z mojego przykładowego zadania. 
 
 
 
-> *All constants for task. Now the first thing I want to be able to do is actually add here new tasks. So I'm using the toolbar to add a button. Action and label with the label being add new task. And the icon is plus. So per default it's showing it on the trailing side of the window. The nice thing with Xcode 15 that I'm using is that in the preview you now see the window so you directly see where the toolbar placement is. Thank you whoever implemented this. That's really nice. Now the action I want to do is here tasks, append creating a new task. So this is not working in a preview because I, again, here I have a constant array, so I can modify this. In order to see this, I need to use the task list view for my content view. Because of this filtering, I can't use it for the other cases here, but I can use it for the all case, all. And then using your binding to all tasks. So going to, if you change, if you go now to the all selection, we have this plus button. And when you add here one, it shows up. Later, maybe you would need to do some programmatic scrolling otherwise the user doesn't see it or also some focus management, which I'm not going to touch. So you can make a text field active. Before we actually have this text field, this focus, I need to actually move from a label here to a text. I want to actually modify whatever is in here. And because I also want to show you some other features, I'm going to use create a new subview. This is new file task view. I want to modify something in here. So this needs to be again, a binding var task. And then in the preview, let's create pass a constant. from my example task. Okay, I start with an HStack. Basically I wanted to modify what I already have here. So let's grab the image and the text. And then in the preview padding. Unfortunately on macOS you don't have a plus button to zoom in, I don't know why they didn't do that. But anyways, one thing I want to do is when the user taps on this icon, I want to toggle the state. So I use a tap on tab gesture performing. And what I want to do for this task, I'm going to change this completed property by gently toggling it. And the other thing is I'm changing the text to a text field, new task. And the binding is to the tasks title. Now on macOS, the text field has a border on the background.* 
-
-
-
-Wszystkie stałe dla zadania. Teraz pierwszą rzeczą, którą chcę zrobić, to możliwość dodawania nowych zadań. Wykorzystuję pasek narzędzi do dodania przycisku. Akcja i etykieta z etykietą "Dodaj nowe zadanie". Ikona to plus. Domyślnie jest wyświetlana z prawej strony okna. Fajna rzecz w Xcode 15, którego używam, polega na tym, że w podglądzie widzisz teraz okno, więc od razu widzisz, gdzie jest umieszczone miejsce paska narzędziowego. Dziękuję temu, kto to zaimplementował. To naprawdę fajne. Teraz działanie, które chcę wykonać, to tutaj zadania, dołączanie nowego zadania. To nie działa w podglądzie, ponieważ mam tutaj stałą tablicę, więc nie mogę jej modyfikować. Aby to zobaczyć, muszę użyć widoku listy zadań dla widoku zawartości. Ze względu na to filtrowanie, nie mogę go użyć w innych przypadkach tutaj, ale mogę go użyć w przypadku wszystkich, all. Następnie używając tu binding do wszystkich zadań. Jeśli przejdziesz teraz do wyboru wszystkich, mamy ten przycisk plus. I kiedy dodasz tutaj jedno, to się pojawia. Później, być może będziesz musiał wykonać jakieś programistyczne przewijanie, inaczej użytkownik tego nie zobaczy, lub też zarządzanie fokusem, o czym nie będę mówił. Możesz aktywować pole tekstowe. Zanim jednak będziemy mieli to pole tekstowe, ten focus, muszę przenieść się z etykiety tutaj do tekstu. Chcę faktycznie zmodyfikować to, co mam tutaj. Dlatego też utworzę nowy podwidok. To nowy plik widoku zadania. Chcę w nim coś zmodyfikować. Musi to być ponownie binding var task. A potem w podglądzie, tworzymy stałą. Z mojego przykładowego zadania. Okej, zaczynam od HStack. W zasadzie chcę zmodyfikować to, co już mam tutaj. Weźmy więc obraz i tekst. A następnie w podglądzie dodajemy padding. Niestety na macOS nie ma przycisku plus do przybliżania, nie wiem, dlaczego tego nie zrobili. Ale tak czy inaczej, jedną rzeczą, którą chcę zrobić, jest to, że gdy użytkownik kliknie na tą ikonę, chcę przełączyć stan. Wykorzystuję tap on tab gesture performing. I co chcę zrobić dla tego zadania, to zmienić tę właściwość completed, delikatnie ją przełączając. A drugą rzeczą jest zmiana tekstu na pole tekstowe "nowe zadanie". I binding do tytułu zadań. Na macOS pole tekstowe ma obramowanie i tło.
+Okej, zaczynam od HStack. W zasadzie chcę zmodyfikować to, co już mam tutaj. Weźmy więc obraz i tekst. A następnie w podglądzie dodajemy padding. Niestety na macOS nie ma przycisku plus do przybliżania, nie wiem, dlaczego tego nie zrobili. Ale tak czy inaczej, jedną rzeczą, którą chcę zrobić, jest to, że gdy użytkownik kliknie na tą ikonę, chcę przełączyć stan. Wykorzystuję tap on tab gesture performing. I co chcę zrobić dla tego zadania, to zmienić tę właściwość completed, delikatnie ją przełączając. A drugą rzeczą jest zmiana tekstu na pole tekstowe "nowe zadanie". I binding do tytułu zadań. Na macOS pole tekstowe ma obramowanie i tło.
 
 
 

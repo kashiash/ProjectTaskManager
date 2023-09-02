@@ -25,18 +25,18 @@ struct TaskGroup:Identifiable,Hashable {
         let task2 =  Task(title: "Zakup whisky", details: "Single malt Scotch")
         let task3 =  Task(title: "Kup piwo", details: "Craft beer z lokalnej browarni, mocno chmielone!")
 
-        var group = TaskGroup(title: "Zakupy pierwszej potrzeby")
+        var group = TaskGroup(title: "Pilne")
         group.tasks = [task1,task2,task3]
         return group
     }
 
     static func examples() -> [TaskGroup] {
         let group1 = TaskGroup.example()
-        let group2 = TaskGroup(title: "Zakupy opcjonalne",  tasks: [
+        let group2 = TaskGroup(title: "Opcjonalne",  tasks: [
             Task(title: "Kup pieluchy", details: "Rozmiar 2, paczka 100 sztuk"),
             Task(title: "Zakup mleko modyfikowane", details: "Dla niemowląt"),
         ])
-        let group3 = TaskGroup(title: "Projekt domowy",  tasks: [
+        let group3 = TaskGroup(title: "Remont",  tasks: [
             Task(title: "Zaprojektuj kuchnię", details: "Nowa zabudowa meblowa"),
             Task(title: "Kup materiały budowlane", details: "Farba, płytki, narzędzia"),
         ])
