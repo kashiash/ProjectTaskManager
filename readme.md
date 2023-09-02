@@ -694,9 +694,48 @@ Dobra, sprawdźmy. Jeśli coś wybiorę z "Kup", zobaczysz, że szuka, a jeśli 
 
 ### Skróty klawiszowe
 
-Teraz przejdźmy do bardziej specyficznych dla macOS funkcji, na przykład skróty klawiszowe. Tutaj do mojego przycisku "Dodaj grupę" w pasku bocznym mogę dodać skrót klawiszowy. Na przykład, stała klucza "A" z komendą.
+Teraz przejdźmy do bardziej specyficznych dla macOS funkcji, na przykład skróty klawiszowe. Tutaj w SidebraView do przycisku "Dodaj grupę" w pasku bocznym mogę dodać skrót klawiszowy. Na przykład, stała klucza "A" z komendą.
 
-W takim przypadku byłby to skrót klawiszowy Command + A. Teraz muszę uruchomić ten projekt. Zauważ, że mój kursor nie jest blisko tego przycisku. Jeśli naciśnę Command + A, utworzyłem nową grupę tutaj. Skróty klawiszowe takie jak ten nie są dodawane bezpośrednio tutaj. Na macOS skróty klawiszowe zwykle umieszcza się w jednym z tych elementów menu. W tej chwili nie mam żadnego elementu menu do dodawania grupy. Zobaczmy, jak dodać te elementy menu. Elementy menu zależą od każdego z tych okien. Muszę więc przejść do mojej głównej aplikacji. W tej grupie okien można dołączyć modyfikator polecenia. `CommandMenu` to menu polecenia. `CommandMenu` oznacza, że tworzysz nowe menu. W tym przypadku użyję tego. Będzie to zadanie i dodam przycisk z napisem "Dodaj nową grupę". Dobrze, zobaczmy, gdzie to zostaje dodane. Możesz także dodać wiele elementów, na przykład po "Dodaj". To jest na przykład "Nowe elementy". Może powinienem to nazwać inaczej, na przykład "Dodaj nowe zadanie". Jedno to "Nowe zadanie". Dobrze, zobaczmy, gdzie te dwa zostaną dodane. Teraz mam tu nowe menu z "Dodaj nowe zadanie". To jest to nowe menu polecenia, które utworzyłem. A drugie, które dodałem "Nowe po zamianie", teraz widzisz "Dodaj nową grupę". To są dwa przypadki, albo dodajesz go już do konkretnego miejsca lub tworzysz nowe menu. Jeśli chcesz mieć podmenu, takie jak "Autofill" tutaj, po prostu używasz `SwiftUI Menu` wewnątrz i możesz tworzyć ich tyle, ile chcesz. Jeśli chcesz, żeby skrót klawiszowy był pokazywany tutaj, jak tutaj "Cofnij", Command + Z, musisz dołączyć skrót klawiszowy do tego elementu menu. Więc zamiast dodawać go tutaj do tego przycisku, musiałbym dodać go tutaj. Gdzie to dodałem? Tutaj jest ten skrót klawiszowy. Użyjmy innego, np. "R". Musisz być nieco uważny, ponieważ już jest wiele używanych kombinacji. Gdzie to dodałem? Tutaj. Widzisz, ten skrót klawiszowy pojawia się w menu "Zadanie". Jak połączyć te dane z menu głównym, to jest nieco bardziej skomplikowane. Teraz nie będę wchodzić w szczegóły, ponieważ to było jednym z głównych problemów z SwiftUI.
+```swift
+            Button(action: {...})
+            ...
+            .keyboardShortcut(KeyEquivalent("a"), modifiers: .command)
+```
+
+W takim przypadku byłby to skrót klawiszowy Command + A. Teraz muszę uruchomić ten projekt. Zauważ, że mój kursor nie jest blisko tego przycisku. Jeśli naciśnę Command + A, utworzyłem nową grupę tutaj. Skróty klawiszowe takie jak ten nie są dodawane bezpośrednio tutaj. Na macOS skróty klawiszowe zwykle umieszcza się w jednym z tych elementów menu. W tej chwili nie mam żadnego elementu menu do dodawania grupy. Zobaczmy, jak dodać te elementy menu. Elementy menu zależą od każdego z tych okien. Muszę więc przejść do mojej głównej aplikacji. W tej grupie okien można dołączyć modyfikator polecenia. `CommandMenu` to menu polecenia. `CommandMenu` oznacza, że tworzysz nowe menu. W tym przypadku użyję tego. Będzie to zadanie i dodam przycisk z napisem "Dodaj nową grupę".
+
+```swift
+struct ProjectTaskManagerApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .commands {
+            CommandMenu("Task") {
+                Button("Add new task") {
+
+                }
+                .keyboardShortcut(KeyEquivalent("r"),modifiers: .command)
+            }
+            CommandGroup(after: .newItem) {
+                Button("Add new group") {
+
+                }
+            }
+        }
+    }
+}
+```
+
+Możesz także dodać wiele elementów, na przykład po "Dodaj".. Jedno to "Nowe zadanie". Dobrze, zobaczmy, gdzie te dwa zostaną dodane. Teraz mam tu nowe menu z "Dodaj nowe zadanie". To jest to nowe menu polecenia, które utworzyłem. A drugie, które dodałem "Nowe po zamianie", teraz widzisz "Dodaj nową grupę". To są dwa przypadki, albo dodajesz go już do konkretnego miejsca lub tworzysz nowe menu. Jeśli chcesz mieć podmenu, takie jak "Autofill" tutaj, po prostu używasz `SwiftUI Menu` wewnątrz i możesz tworzyć ich tyle, ile chcesz. Jeśli chcesz, żeby skrót klawiszowy był pokazywany tutaj,, musisz dołączyć skrót klawiszowy do tego elementu menu.  Użyjmy innego, np. "R". Musisz być nieco uważny, ponieważ już jest wiele używanych kombinacji. 
+
+```swift
+.keyboardShortcut(KeyEquivalent("r"),modifiers: .command)
+```
+
+![image-20230903003855445](image-20230903003855445.png)
+
+Widzisz, ten skrót klawiszowy pojawia się w menu "Zadanie". Jak połączyć te dane z menu głównym, to jest nieco bardziej skomplikowane. Teraz nie będę wchodzić w szczegóły, ponieważ to było jednym z głównych problemów z SwiftUI.
 
 
 
@@ -704,9 +743,34 @@ Jedną z funkcji, która moim zdaniem działa bardzo dobrze, jest nowa właściw
 
 Inną ważną funkcją, na którą warto zwrócić uwagę, jest "focused binding" (połączenie skupienia). Jest to nieco bardziej skomplikowane, ponieważ czasami chcesz przełączać między trybem włączonym a wyłączonym. Ta funkcja działa razem z modyfikatorem "focus scene value". Jest nieco bardziej skomplikowana, ponieważ musisz ją przypiąć do odpowiednich widoków. Dodatkowo, możesz chcieć używać menu. Na przykład, w moim widoku bocznym (sidebar view), do folderów, które użytkownik może tworzyć, chcę umożliwić usuwanie. Możesz w tym celu użyć menu kontekstowego (context menu). Możesz także użyć zwykłego menu (menu), które jest rozwijane lub wyświetlane jako okna popup. Jednak menu kontekstowe jest prostsze w użyciu.
 
-Wygenerowałem tutaj trzy teksty. Spróbujmy, czy można kliknąć prawym przyciskiem myszy. Usuńmy teraz te elementy menu. Teraz możesz kliknąć prawym przyciskiem myszy na jednym z tych elementów i zobaczysz menu rozwijane. One wyglądają na wyłączone, ponieważ używam tutaj tekstu, a system automatycznie oczekuje przycisków. Jeśli przejdziesz do przycisku "Usuń" oznaczonego jako "destructive role" (zadanie niszczące), a następnie chcesz usunąć tę grupę z listy, jeśli `let index` jest równy `user created groups.first`, gdzie `ID` grupy jest równa `ID` grupy, to możesz usunąć grupę z `user created groups` na tym indeksie. Zamiast bezpośredniego usuwania możesz także pokazać alert lub okno potwierdzenia. Tutaj używam "first index" jako przykładu.
+Wygenerowałem tutaj trzy teksty. Spróbujmy, czy można kliknąć prawym przyciskiem myszy. Usuńmy teraz te elementy menu. Teraz możesz kliknąć prawym przyciskiem myszy na jednym z tych elementów i zobaczysz menu rozwijane. One wyglądają na wyłączone, ponieważ używam tutaj tekstu, a system automatycznie oczekuje przycisków.
 
-Spróbujmy teraz kliknąć prawym przyciskiem i wybrać "Usuń". Niestety, nic się nie dzieje, ponieważ mam tutaj swoje statyczne dane. Uruchommy to teraz. Tworzę nową grupę, klikam prawym przyciskiem myszy i usuwam ją. Możesz dodać więcej menu kontekstowych z różnymi podsekcjami. Czasami na macOS można napotkać wiele problemów z konkurencyjnymi gestami, ponieważ teraz mam tu zaznaczony tekst, dlatego trzeba być bardziej świadomym rywalizujących gestów. Jeśli chcesz, możesz również dodać tego rodzaju menu kontekstowe do swoich zadań (tasks), aby umożliwić ich usuwanie. Na iOS masz gest przeciągnięcia w celu usunięcia (swipe on delete), ale na macOS tego nie mamy. Zamiast tego używamy menu kontekstowego (context menu).
+W sidebarView pod  `.tag(TaskSection.list(group))` dodajemy `contextMenu`
+
+```swift
+            Section("Your groups") {
+                ...
+                        .tag(TaskSection.list(group))
+                        .contextMenu {
+                            Button("Delete",role: .destructive) {
+                                if let index = userCreatedGroups.firstIndex(where: { $0.id == group.id}) {
+                                    userCreatedGroups.remove(at: index)
+                                }
+                            }
+                        }
+                }
+            }
+```
+
+ Jeśli przejdziesz do przycisku "Usuń" oznaczonego jako "destructive role" (zadanie niszczące), a następnie chcesz usunąć tę grupę z listy, jeśli `let index` jest równy `user created groups.first`, gdzie `ID` grupy jest równa `ID` grupy, to możesz usunąć grupę z `user created groups` na tym indeksie. Zamiast bezpośredniego usuwania możesz także pokazać alert lub okno potwierdzenia. Tutaj używam "first index" jako przykładu.
+
+Spróbujmy teraz kliknąć prawym przyciskiem i wybrać "Usuń". Niestety, nic się nie dzieje, ponieważ mam tutaj swoje statyczne dane. Uruchommy to teraz. Tworzę nową grupę, klikam prawym przyciskiem myszy i usuwam ją. Możesz dodać więcej menu kontekstowych z różnymi podsekcjami. 
+
+![image-20230903005323204](image-20230903005323204.png)
+
+
+
+Czasami na macOS można napotkać wiele problemów z konkurencyjnymi gestami, ponieważ teraz mam tu zaznaczony tekst, dlatego trzeba być bardziej świadomym rywalizujących gestów. Jeśli chcesz, możesz również dodać tego rodzaju menu kontekstowe do swoich zadań (tasks), aby umożliwić ich usuwanie. Na iOS masz gest przeciągnięcia w celu usunięcia (swipe on delete), ale na macOS tego nie mamy. Zamiast tego używamy menu kontekstowego (context menu).
 
 
 

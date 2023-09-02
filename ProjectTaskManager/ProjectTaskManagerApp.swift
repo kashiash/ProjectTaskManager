@@ -13,5 +13,18 @@ struct ProjectTaskManagerApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            CommandMenu("Task") {
+                Button("Add new task") {
+
+                }
+                .keyboardShortcut(KeyEquivalent("r"),modifiers: .command)
+            }
+            CommandGroup(after: .newItem) {
+                Button("Add new group") {
+
+                }
+            }
+        }
     }
 }
