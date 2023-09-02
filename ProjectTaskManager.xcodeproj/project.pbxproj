@@ -13,6 +13,7 @@
 		766CA6F02AA2713E00BE2D47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 766CA6EF2AA2713E00BE2D47 /* Preview Assets.xcassets */; };
 		766CA6F92AA271C800BE2D47 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6F82AA271C800BE2D47 /* Task.swift */; };
 		766CA6FB2AA3285E00BE2D47 /* TaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */; };
+		766CA6FD2AA32F9F00BE2D47 /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6FC2AA32F9F00BE2D47 /* TaskSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		766CA6F12AA2713E00BE2D47 /* ProjectTaskManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProjectTaskManager.entitlements; sourceTree = "<group>"; };
 		766CA6F82AA271C800BE2D47 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGroup.swift; sourceTree = "<group>"; };
+		766CA6FC2AA32F9F00BE2D47 /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				766CA6F82AA271C800BE2D47 /* Task.swift */,
 				766CA6FA2AA3285E00BE2D47 /* TaskGroup.swift */,
+				766CA6FC2AA32F9F00BE2D47 /* TaskSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			files = (
 				766CA6EB2AA2713C00BE2D47 /* ContentView.swift in Sources */,
 				766CA6F92AA271C800BE2D47 /* Task.swift in Sources */,
+				766CA6FD2AA32F9F00BE2D47 /* TaskSection.swift in Sources */,
 				766CA6FB2AA3285E00BE2D47 /* TaskGroup.swift in Sources */,
 				766CA6E92AA2713C00BE2D47 /* ProjectTaskManagerApp.swift in Sources */,
 			);
@@ -295,6 +299,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kashiash.ProjectTaskManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -322,6 +327,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kashiash.ProjectTaskManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";

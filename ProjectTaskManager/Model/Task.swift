@@ -1,7 +1,7 @@
 import Foundation
 
 
-struct Task: Identifiable {
+struct Task: Identifiable,Hashable {
     internal init(title: String, isCompleted: Bool = false, dueDate: Date = Date(), details: String? = nil) {
         self.title = title
         self.isCompleted = isCompleted

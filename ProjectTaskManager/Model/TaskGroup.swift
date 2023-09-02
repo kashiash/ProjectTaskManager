@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskGroup:Identifiable {
+struct TaskGroup:Identifiable,Hashable {
     internal init(title: String,  tasks: [Task] = []) {
         self.title = title
         self.creationDate = Date()
