@@ -631,21 +631,66 @@ Mamy teraz ładny pasek boczny dla sekcji "Wszystko". Mogę coś edytować, mog�
 
 
 
-Dobra, teraz kontynuujmy implementowanie niektórych interesujących funkcji, na przykład wyszukiwania. Chcę mieć tutaj pole tekstowe do wyszukiwania w pasku narzędziowym, a można to zrobić za pomocą modyfikatora `searchable`. Dodam to tutaj do mojego paska bocznego i muszę mieć binding do pola tekstowego do wyszukiwania. Ponownie deklaruję stan: `@State private var searchTerm = ""`, zaczynamy od pustego ciągu znaków, i teraz mogę to tutaj użyć. Domyślnie jest to dodane do paska narzędziowego na stronie trailing. Możesz to również zmienić za pomocą dodatkowego parametru `placement`, na przykład mogę powiedzieć `sidebar`, i teraz jest przeniesione do paska bocznego. W tym przypadku ma więcej sensu w pasku narzędziowym, ponieważ chcę filtrować wszystkie moje zadania. Więc po prostu to usunę. Możesz również przenieść pozycję tego poza widok nawigacyjny. Modyfikator `searchable` posiada wiele zaawansowanych funkcji, takich jak tokeny i zakresy. Umieszczę linki do źródeł w opisie. Mam także samouczek dotyczący wyszukiwania. Teraz postaram się to zrobić dość szybko, i będziemy filtrować wszystkie zadania. W zależności od tego, czy mam właściwe pole tekstowe do wyszukiwania, jeśli `searchTerm` jest puste, używam domyślnych wyborów, które mieliśmy wcześniej. Jeśli mam coś, czym mogę filtrować, używam podobnej konstrukcji do filtrowania. W tym przypadku używam `title` zawiera moje `searchTerm`. Dobra, sprawdźmy. Jeśli coś wybiorę z "Crazy", zobaczysz, że szuka, a jeśli wyczyszczę pole tekstowe, wraca do wyświetlania wszystkich. W tym przypadku. Istnieje wiele innych filtrów, które można zastosować, na przykład, zamiast używać tutaj "Done" i "Upcoming" jako osobnej sekcji, można także dodać opcje filtrowania. Prawdopodobnie przydatne jest uwzględnienie wielu filtrów. Na przykład można używać tokenów do wyszukiwania wielu terminów w tekście. Coś, co zawiera "crazy" i zawiera "world", na przykład, to była by ta pozycja. Chociaż na iOS mamy wyszukiwanie, myślę, że na macOS jest to jeszcze ważniejsze. To narzędzie do pracy, prawdopodobnie masz dużo danych, notatek, naprawdę chcesz pozwolić użytkownikowi na bardziej precyzyjne wyszukiwanie. Teraz przejdźmy do bardziej specyficznych dla macOS funkcji, na przykład skróty klawiszowe. Tutaj do mojego przycisku "Dodaj grupę" w pasku bocznym mogę dodać skrót klawiszowy. Na przykład, stała klucza "A" z komendą.
+Dobra, teraz kontynuujmy implementowanie niektórych interesujących funkcji, na przykład wyszukiwania. Chcę mieć tutaj pole tekstowe do wyszukiwania w pasku narzędziowym, a można to zrobić za pomocą modyfikatora `searchable`. Dodam to tutaj do mojego paska bocznego i muszę mieć binding do pola tekstowego do wyszukiwania. Ponownie deklaruję stan: `@State private var searchTerm = ""`, zaczynamy od pustego ciągu znaków, i teraz mogę to tutaj użyć. Domyślnie jest to dodane do paska narzędziowego na stronie trailing. Możesz to również zmienić za pomocą dodatkowego parametru `placement`, na przykład mogę powiedzieć `sidebar`, i teraz jest przeniesione do paska bocznego. W tym przypadku ma więcej sensu w pasku narzędziowym, ponieważ chcę filtrować wszystkie moje zadania. Więc po prostu to usunę. Możesz również przenieść pozycję tego poza widok nawigacyjny. Modyfikator `searchable` posiada wiele zaawansowanych funkcji, takich jak tokeny i zakresy. Umieszczę linki do źródeł w opisie. Mam także samouczek dotyczący wyszukiwania. Teraz postaram się to zrobić dość szybko, i będziemy filtrować wszystkie zadania. W zależności od tego, czy mam właściwe pole tekstowe do wyszukiwania, jeśli `searchTerm` jest puste, używam domyślnych wyborów, które mieliśmy wcześniej. Jeśli mam coś, czym mogę filtrować, używam podobnej konstrukcji do filtrowania. W tym przypadku używam `title` zawiera moje `searchTerm`. 
+
+```swift
+                StaticTaskListView(title: "Upcoming", tasks: allTasks.filter({$0.title.contains(searchTerm)}))
+```
 
 
 
-> *This would be then the keyboard shortcut command A. I need to run this project now. You see my mouse is not close to this button. If I press command A, I created a new group here. you would add this kind of keyboard shortcuts not directly here. On MacOS you would put it to one of these menu items. Currently I don't have any menu item for adding a group. So let's have a look at how to add these menu items. Menu items depend on each of these windows. So I have to go to my main app. To this window group you can attach a command modifier. So command menu. Command menu menu means you're creating a new menu. Maybe I'm just going to use this in this case. This would be task and adding a button titled this is add new group. Okay, let's see where this adds it. You can also add your multiple for example, after addition. This is for example, new items. Maybe I should rename this different add new task. One is a new task. And what Okay, let's see where these two are added. So now I have here a new menu with "Add new task". So this is the new command menu that I created. And the other one where I said "New after replacement", you see now I have here "Add new group". This is the one that, these are the two cases, either you add it to a specific place already or you create a new menu. If you want to have your submenus, like autofill here, then you just use the SwiftUI menu inside. can create as many as you want to. If you want the keyboard shortcut shown here like here undo, command Z, you need to append the keyboard shortcut to this menu item. So instead of adding it here to this button I would need to add it here. Where did I add this? Here this is this keyboard shortcut. Let's just use a different one of R. Need to be a little bit paying attention to this because there's already quite a few that are taken. So where did I add this here? To task you see this keyboard shortcut coming up. How you connect this data from your menu to your main window, this is a little bit more complicated. I'm not going to go into detail now because this was one of the main issues with SwiftUI.* 
 
 
+Całość poz mianie wygląda tak:
+
+```swift
+struct ContentView: View {
+
+    @State private var selection: TaskSection? = TaskSection.all
+    @State private var allTasks = Task.examples()
+    @State private var userCreatedGroups = TaskGroup.examples()
+
+    @State private var searchTerm: String = ""
+    
+    var body: some View {
+        NavigationSplitView{
+            SidebarView(userCreatedGroups: $userCreatedGroups,
+                        selection: $selection)
+
+        } detail: {
+            if searchTerm.isEmpty {
+                switch selection {
+                case .all:
+                    TaskListView(title: "All", tasks: $allTasks)
+                case .done:
+                    StaticTaskListView(title:"Done", tasks: allTasks.filter({ $0.isCompleted }))
+                case .upcoming:
+                    StaticTaskListView(title: "Upcoming", tasks: allTasks.filter({$0.isCompleted == false }))
+
+                case .list(let taskGroup):
+
+                    StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
+                case .none:
+                    TaskListView(title: "All", tasks: $allTasks)
+                }
+            } else {
+                StaticTaskListView(title: "Upcoming", tasks: allTasks.filter({$0.title.contains(searchTerm)}))
+            }
+        }
+        .searchable(text: $searchTerm)
+    }
+}
+```
+
+
+
+Dobra, sprawdźmy. Jeśli coś wybiorę z "Kup", zobaczysz, że szuka, a jeśli wyczyszczę pole tekstowe, wraca do wyświetlania wszystkich. W tym przypadku. Istnieje wiele innych filtrów, które można zastosować, na przykład, zamiast używać tutaj "Done" i "Upcoming" jako osobnej sekcji, można także dodać opcje filtrowania. Prawdopodobnie przydatne jest uwzględnienie wielu filtrów. Na przykład można używać tokenów do wyszukiwania wielu terminów w tekście. Coś, co zawiera "crazy" i zawiera "world", na przykład, to była by ta pozycja. Chociaż na iOS mamy wyszukiwanie, myślę, że na macOS jest to jeszcze ważniejsze. To narzędzie do pracy, prawdopodobnie masz dużo danych, notatek, naprawdę chcesz pozwolić użytkownikowi na bardziej precyzyjne wyszukiwanie. 
+
+### Skróty klawiszowe
+
+Teraz przejdźmy do bardziej specyficznych dla macOS funkcji, na przykład skróty klawiszowe. Tutaj do mojego przycisku "Dodaj grupę" w pasku bocznym mogę dodać skrót klawiszowy. Na przykład, stała klucza "A" z komendą.
 
 W takim przypadku byłby to skrót klawiszowy Command + A. Teraz muszę uruchomić ten projekt. Zauważ, że mój kursor nie jest blisko tego przycisku. Jeśli naciśnę Command + A, utworzyłem nową grupę tutaj. Skróty klawiszowe takie jak ten nie są dodawane bezpośrednio tutaj. Na macOS skróty klawiszowe zwykle umieszcza się w jednym z tych elementów menu. W tej chwili nie mam żadnego elementu menu do dodawania grupy. Zobaczmy, jak dodać te elementy menu. Elementy menu zależą od każdego z tych okien. Muszę więc przejść do mojej głównej aplikacji. W tej grupie okien można dołączyć modyfikator polecenia. `CommandMenu` to menu polecenia. `CommandMenu` oznacza, że tworzysz nowe menu. W tym przypadku użyję tego. Będzie to zadanie i dodam przycisk z napisem "Dodaj nową grupę". Dobrze, zobaczmy, gdzie to zostaje dodane. Możesz także dodać wiele elementów, na przykład po "Dodaj". To jest na przykład "Nowe elementy". Może powinienem to nazwać inaczej, na przykład "Dodaj nowe zadanie". Jedno to "Nowe zadanie". Dobrze, zobaczmy, gdzie te dwa zostaną dodane. Teraz mam tu nowe menu z "Dodaj nowe zadanie". To jest to nowe menu polecenia, które utworzyłem. A drugie, które dodałem "Nowe po zamianie", teraz widzisz "Dodaj nową grupę". To są dwa przypadki, albo dodajesz go już do konkretnego miejsca lub tworzysz nowe menu. Jeśli chcesz mieć podmenu, takie jak "Autofill" tutaj, po prostu używasz `SwiftUI Menu` wewnątrz i możesz tworzyć ich tyle, ile chcesz. Jeśli chcesz, żeby skrót klawiszowy był pokazywany tutaj, jak tutaj "Cofnij", Command + Z, musisz dołączyć skrót klawiszowy do tego elementu menu. Więc zamiast dodawać go tutaj do tego przycisku, musiałbym dodać go tutaj. Gdzie to dodałem? Tutaj jest ten skrót klawiszowy. Użyjmy innego, np. "R". Musisz być nieco uważny, ponieważ już jest wiele używanych kombinacji. Gdzie to dodałem? Tutaj. Widzisz, ten skrót klawiszowy pojawia się w menu "Zadanie". Jak połączyć te dane z menu głównym, to jest nieco bardziej skomplikowane. Teraz nie będę wchodzić w szczegóły, ponieważ to było jednym z głównych problemów z SwiftUI.
-
-
-
-
-
-> *The one that I think works very well is now the newer property the word "property" which is "focused object". This is for example if you have a view model in one of your views. This one you can then directly access. So they added this for MacOS 13. It wasn't there for the WWDC 2022, that's why you might not have heard of it, but it's very useful. The other one that you might want to look at is "focused binding". This is a little bit tricky, because sometimes you want to toggle if it's enabled or disabled. This works together with the modifier focus scene value. It's a little bit more complicated because you need to attach it to the right views. Additionally, you might want to use menus. So for example, in my sidebar view here to my folder, the ones that user could create, I want to actually allow them to delete them. And you can use a context menu. You can also use a menu. This would be then a drop down menu or pop ups. But context menu is just easier. I have generated here three texts. Let's try if you right click. Let's just take out these menu items. Okay, now you can right click on one of these elements and you see this drop down menu. They are looking disabled because I use here text and it automatically expects buttons. if you move to a button saying delete destructive role and then you want to delete this group from this list if let index is user created groups dot first where this ID is equal to the groups ID. Then I can remove from the user created groups at this index. Instead of directly deleting this you could also show alert or confirmation dialog. This is first index. Okay let's try right-clicking delete and again it doesn't do it because I have here my static things just going to run this now I create a new group right click delete and it deletes this you can add more menus context menus with multiple subdivisions sometimes macOS I found that a lot of the problems I get is with multiple gestures because now I have here text field selection so sometimes it's just especially here it might not take my right click directly so you need to be a little bit more aware of the competing gestures if you want you can also add this kind of context menus to the to here my tasks to delete them because I didn't actually add this on iOS you have swipe on delete and this is what we don't have or edit mode, we don't have this on macOS. And instead of swipe on delete, you use kind of context menus.* 
 
 
 
