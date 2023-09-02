@@ -267,9 +267,33 @@ enum TaskSection: Identifiable,CaseIterable,Hashable {
 
 
 
-Teraz mogę zająć się bardziej interesującymi rzeczami i pracować nad widokami. Chcę, aby był widok bocznego paska. To jest w tym przypadku widok `NavigationView`. `SidebarView`. A potem w głównym kontencie jest to `TaskListView`. Najpierw zaczniemy od widoku listy zadań. Główną rzeczą, którą chcę tutaj pokazać, to zadania, więc muszę mieć tablicę moich danych. `let tasks` to tablica zadań. I także tytuł, łańcuch znaków. Teraz w moim podglądzie, na przykład, chcę pokazać wszystko. Teraz używam przykładów zadań. To jest ta tablica. Główną treścią jest lista zadan, `Task in`. Więc tutaj pokazałbym tekst z tytułem zadania. To są domyślne wartości, które utworzyłem. Oprócz tekstu chcę także pokazać
+Teraz mogę zająć się bardziej interesującymi rzeczami i pracować nad widokami. Chcę, aby był widok bocznego paska. To jest w tym przypadku widok `NavigationView`. `SidebarView`. A potem w głównym kontencie jest to `TaskListView`. Najpierw zaczniemy od widoku listy zadań. 
 
- ikonę, jeśli to jest zrobione zadanie lub nie. `Image(systemName:)`. Spójrzmy na bibliotekę Xcode i ikony, to jest ikona koła. Więc mogę po prostu użyć zwykłego koła, a my chcemy przełączyć się i zdecydować, co pokazać w zależności od tego, czy zadanie jest ukończone, znak zapytania. Jeśli jest ukończone, chcę pokazać inne, mogę użyć `.circle.fill`, `.circle`. Teraz mamy dwie różne ikony tutaj. Dobra, zostawmy to na razie, a będziemy dodawać interaktywne modyfikacje później, gdzie użytkownik może zmieniać tekst i flagę logiczną, czy jest ukończone, czy nie. Przejdźmy do widoku bocznego, więc znowu zaczynam od listy. Jedna rzecz, którą zdecydowanie chcę pokazać, to selekcja zadań. `All cases`. `Selection in`. Używam etykiety, ponieważ już dodałem informacje o nazwie wyświetlanej w selekcji i nazwie ikony w selekcji.
+```swift
+struct TaskListView: View {
+
+    let title: String
+    let tasks: [Task]
+    var body: some View {
+        List(tasks){ task in
+            HStack{
+                Image(systemName: task.isCompleted ? "largecircle.fill.circle" : "circle")
+                Text(task.title)
+            }
+        }
+    }
+}
+
+struct TaskListView_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskListView(title: "Zadanka", tasks: Task.examples())
+    }
+}
+```
+
+
+
+Główną rzeczą, którą chcę tutaj pokazać, to zadania, więc muszę mieć tablicę moich danych. `let tasks` to tablica zadań. I także tytuł, łańcuch znaków. Teraz w moim podglądzie, na przykład, chcę pokazać wszystko. Teraz używam przykładów zadań. To jest ta tablica. Główną treścią jest lista zadan, `Task in`. Więc tutaj pokazałbym tekst z tytułem zadania. To są domyślne wartości, które utworzyłem. Oprócz tekstu chcę także pokazać ikonę, jeśli to jest zrobione zadanie lub nie. `Image(systemName:)`. Spójrzmy na bibliotekę Xcode i ikony, to jest ikona koła. Więc mogę po prostu użyć zwykłego koła, a my chcemy przełączyć się i zdecydować, co pokazać w zależności od tego, czy zadanie jest ukończone, znak zapytania. Jeśli jest ukończone, chcę pokazać inne, mogę użyć `.circle.fill`, `.circle`. Teraz mamy dwie różne ikony tutaj. Dobra, zostawmy to na razie, a będziemy dodawać interaktywne modyfikacje później, gdzie użytkownik może zmieniać tekst i flagę logiczną, czy jest ukończone, czy nie. Przejdźmy do widoku bocznego, więc znowu zaczynam od listy. Jedna rzecz, którą zdecydowanie chcę pokazać, to selekcja zadań. `All cases`. `Selection in`. Używam etykiety, ponieważ już dodałem informacje o nazwie wyświetlanej w selekcji i nazwie ikony w selekcji.
 
 
 
