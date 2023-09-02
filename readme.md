@@ -372,11 +372,17 @@ struct ContentView_Previews: PreviewProvider {
 
 ```
 
-Teraz, co do szczegółów. To zależy od tego, co wybrałem tutaj. Używam instrukcji wyboru switch. Jeśli mam listę, mogę jej użyć i użyć tytułu grupy zadań i zadań grupy zadań. Teraz muszę pokazać ci coś dla wszystkich, zrobionych i nadchodzących. Nie chcę robić tego zbyt skomplikowanego, więc zamierzam oszukać system i pokazać trochę danych testowych. Więc definiujemy : @state private var allTasks, a to moja tablica przykładowych zadań. Widok listy zadań dla wszystkich, pokazując wszystkie zadania. W przypadku dwóch pozostałych przypadków zamierzam to przefiltrować. To naprawdę tylko dla naszego projektu demonstracyjnego. Nie chcę tego zbyt komplikować, więc tutaj filtruję to, mówiąc, że tylko jeśli zadanie jest zakończone, a w przypadku nadchodzących również to filtrowanie, ale mówiąc, że nie jest zakończone. Przetestujmy to. W przypadku "all" widzę wszystko zrobione. Widzę te zrobione, ponieważ mają kropkę, a nadchodzące to te, które nie są zakończone. Następnie przechodząc do "personal" jest ta, którą stworzyłem, a pozostałe nie mają żadnych. Więc to wygląda na jakieś działające. Już coś widać w naszym programie. 
+Teraz, co do szczegółów. To zależy od tego, co wybrałem tutaj. Używam instrukcji wyboru switch. Jeśli mam listę, mogę jej użyć i użyć tytułu grupy zadań i zadań grupy zadań. Teraz muszę pokazać ci coś dla wszystkich, zrobionych i nadchodzących. Nie chcę robić tego zbyt skomplikowanego, więc tymczasowo zamierzam oszukać system i po prostu pokazać trochę danych testowych. W dalszej rozbudowe projektu bedziemy te dane pobierali z bazy danych. Więc definiujemy : `@state private var allTasks`, a to moja tablica przykładowych zadań. Widok listy zadań dla wszystkich, pokazując wszystkie zadania. W przypadku dwóch pozostałych przypadków zamierzam to przefiltrować. To naprawdę tylko dla naszego projektu demonstracyjnego. Nie chcę tego zbyt komplikować, więc tutaj filtruję to, mówiąc, że tylko jeśli zadanie jest zakończone, a w przypadku nadchodzących również to filtrowanie, ale mówiąc, że nie jest zakończone. Przetestujmy to. W przypadku "all" widzę wszystko zrobione. Widzę te zrobione, ponieważ mają kropkę ![circle.inset.filled](circle.inset.filled.png), a nadchodzące to te, które nie są zakończone ![circle](circle.png). Następnie przechodząc do "personal" jest ta, którą stworzyłem, a pozostałe nie mają żadnych. Więc to wygląda na jakieś działające. Już coś widać w naszym programie. 
 
 
 
 ![2023-09-02_13-55-32 (1)](2023-09-02_13-55-32%20(1)-3655983.gif)
+
+
+
+### Dodawanie grup zadań
+
+
 
 Teraz dodajmy trochę więcej interakcji. Pierwsza z nich to tutaj w moim panelu bocznym chcę dodać przycisk, dodowania grup zadań.. Co oznacza, że w moim widoku listy panelu bocznego muszę to dodać na dole. Jeśli dodasz to do listy, pojawi się na końcu listy, ale jeśli dodasz więcej grup, tak jak chce użytkownik, chcę się upewnić, że użytkownik zawsze je widzi i nie tylko wtedy, gdy przewijają. Więc nie dodaję tego do listy, używam sztuczki, żeby użyć wcięć w obszarze bezpiecznym. `safeAreaInsetEdgeButton` na iOS masz umieszczenie paska narzędziowego na pasku przycisków, ale na macOS tego nie mamy. Dobra, dodajmy przycisk, akcję i etykietę, więc jest tam na dole, a etykieta to "title" i "add group" z plusem i kropką w okręgu. Teraz macOS domyślnie dodaje ramkę i tło do stylów przycisków. Możesz to zmienić, korzystając ze stylu przycisku "borderless". Teraz jest to szare, a następnie mogę zmienić kolor tekstu na zdefiniowany w assets kolor .accentColor. Dodaję tutaj margines, i tak naprawdę chcę to przenieść na początkową krawędź. Więc używam f-frame o maksymalnej szerokości nieskończoności z wyrównaniem do lewej krawędzi.
 
@@ -461,7 +467,13 @@ struct SidebarView: View {
 
 
 
-Czasami podgląd nie chce się wyczyścić. Dobra, teraz, gdy dwukrotnie naciśnę, mogę wejść do pola tekstowego i zmienić typ. Nie zmienia się ciągle tutaj i tam w tym podglądzie. Muszę przejść do widoku zawartości. To dlatego, że użyłem stałej. Więc dodaję nową grupę, zmieniam. Teraz to działa prawidłowo. Za chwilę dodam tu skrót klawiaturowy, kiedy porozmawiamy bardziej szczegółowo o rzeczach specyficznych dla macOS. Przed tym chcę, żeby ta lista była edytowalna. I ponieważ w widoku zawartości przekazuję to tutaj z tym przełącznikiem w tym selekcjonowaniu, jest to trochę bardziej skomplikowane do wykonania filtrowania. Więc zamierzam stworzyć drugą wersję widoku listy zadań. Myślałem o użyciu nowego atrybutu Observable, ale z drugiej strony, jeśli uruchamiasz to na macOS, musisz mieć zainstalowany nowy macOS 14, i nie jestem pewien, czy masz. To jest prawdopodobnie bezpieczniejsze w ten sposób. A potem, ponieważ zamierzam w przyszłości używać Core Data, to będzie o wiele łatwiejsze, zobaczysz. Jednym z powodów, dla których Core Data jest w tym przypadku przydatne. Okej, więc ta lista zadań tutaj będzie tylko statyczna. Zmieniamy poprzez Refactor/Rename TaskListView na StaticTaskListView. A potem tworzymy TaskListView dla widoku listy zadań. Kopiujemy zawartość z pierwotnej metody. Teraz jedną z różnic jest to, że chcę zmieniać i edytować swoje zadanie. Więc lista zadań  musi stać się zmienną z atrybutem bindug:   `@Binding var tasks: [Task]`. Następnie musimy to zmienić tutaj.
+Czasami podgląd nie chce się wyczyścić. Dobra, teraz, gdy dwukrotnie naciśnę, mogę wejść do pola tekstowego i zmienić typ. Nie zmienia się ciągle tutaj i tam w tym podglądzie. Muszę przejść do widoku zawartości. To dlatego, że użyłem stałej. Więc dodaję nową grupę, zmieniam. Teraz to działa prawidłowo. Za chwilę dodam tu skrót klawiaturowy, kiedy porozmawiamy bardziej szczegółowo o rzeczach specyficznych dla macOS. 
+
+
+
+### Dodawanie i edycja zadań
+
+Przed tym chcę, żeby ta lista była edytowalna. I ponieważ w widoku zawartości przekazuję to tutaj z tym przełącznikiem w tym selekcjonowaniu, jest to trochę bardziej skomplikowane do wykonania filtrowania. Więc zamierzam stworzyć drugą wersję widoku listy zadań. Myślałem o użyciu nowego atrybutu Observable, ale z drugiej strony, jeśli uruchamiasz to na macOS, musisz mieć zainstalowany nowy macOS 14, i nie jestem pewien, czy masz. To jest prawdopodobnie bezpieczniejsze w ten sposób. A potem, ponieważ zamierzam w przyszłości używać Core Data, to będzie o wiele łatwiejsze, zobaczysz. Jednym z powodów, dla których Core Data jest w tym przypadku przydatne. Okej, więc ta lista zadań tutaj będzie tylko statyczna. Zmieniamy poprzez Refactor/Rename TaskListView na StaticTaskListView. A potem tworzymy TaskListView dla widoku listy zadań. Kopiujemy zawartość z pierwotnej metody. Teraz jedną z różnic jest to, że chcę zmieniać i edytować swoje zadanie. Więc lista zadań  musi stać się zmienną z atrybutem bindug:   `@Binding var tasks: [Task]`. Następnie musimy to zmienić tutaj.
 
 Teraz pierwszą rzeczą, którą chcę zrobić, to możliwość dodawania nowych zadań. Wykorzystuję pasek narzędzi do dodania przycisku. Akcja i etykieta z etykietą "Dodaj nowe zadanie". Ikona to plus. Domyślnie jest wyświetlana z prawej strony okna. 
 
@@ -469,34 +481,153 @@ Teraz pierwszą rzeczą, którą chcę zrobić, to możliwość dodawania nowych
         List(tasks){...}
         .toolbar {
             Button {
-
+							tasks.append(Task(title: "Nowe zadanie"))
             } label: {
                 Label("Nowe zadanie", systemImage: "plus")
             }
         }
 ```
 
-Teraz działanie, które chcę wykonać, to tutaj zadania, dołączanie nowego zadania. To nie działa w podglądzie, ponieważ mam tutaj stałą tablicę, więc nie mogę jej modyfikować. Aby to zobaczyć, muszę użyć widoku listy zadań dla widoku zawartości. Ze względu na to filtrowanie, nie mogę go użyć w innych przypadkach tutaj, ale mogę go użyć w przypadku wszystkich, all. Następnie używając tu binding do wszystkich zadań. Jeśli przejdziesz teraz do wyboru wszystkich, mamy ten przycisk plus. I kiedy dodasz tutaj jedno, to się pojawia. Później, być może będziesz musiał wykonać jakieś programistyczne przewijanie, inaczej użytkownik tego nie zobaczy, lub też zarządzanie fokusem, o czym nie będę mówił. Możesz aktywować pole tekstowe. Zanim jednak będziemy mieli to pole tekstowe, ten focus, muszę przenieść się z etykiety tutaj do tekstu. Chcę faktycznie zmodyfikować to, co mam tutaj. Dlatego też utworzę nowy podwidok. To nowy plik widoku zadania. Chcę w nim coś zmodyfikować. Musi to być ponownie binding var task. A potem w podglądzie, tworzymy stałą. Z mojego przykładowego zadania. 
+Teraz działanie, które chcę wykonać, to tutaj zadania, dołączanie nowego zadania. To nie działa w podglądzie, ponieważ mam tutaj stałą tablicę, więc nie mogę jej modyfikować. Aby to zobaczyć, muszę użyć widoku listy zadań dla widoku zawartości. Ze względu na to filtrowanie, nie mogę go użyć w innych przypadkach tutaj, ale mogę `TaskListView(title: "All", tasks: $allTasks)` użyć w przypadku wszystkich, all.
+
+```swift
+struct ContentView: View {
+
+    ...
+    
+    var body: some View {
+        NavigationSplitView{
+            ...
+            switch selection {
+            case .all:
+                TaskListView(title: "All", tasks: $allTasks)
+            case .done:
+                StaticTaskListView(title:"Done", tasks: allTasks.filter({ $0.isCompleted }))
+            case .upcoming:
+                StaticTaskListView(title: "Upcoming", tasks: allTasks.filter({$0.isCompleted == false }))
+            case .list(let taskGroup):
+                StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
+            }
+        }
+    }
+```
 
 
 
-Okej, zaczynam od HStack. W zasadzie chcę zmodyfikować to, co już mam tutaj. Weźmy więc obraz i tekst. A następnie w podglądzie dodajemy padding. Niestety na macOS nie ma przycisku plus do przybliżania, nie wiem, dlaczego tego nie zrobili. Ale tak czy inaczej, jedną rzeczą, którą chcę zrobić, jest to, że gdy użytkownik kliknie na tą ikonę, chcę przełączyć stan. Wykorzystuję tap on tab gesture performing. I co chcę zrobić dla tego zadania, to zmienić tę właściwość completed, delikatnie ją przełączając. A drugą rzeczą jest zmiana tekstu na pole tekstowe "nowe zadanie". I binding do tytułu zadań. Na macOS pole tekstowe ma obramowanie i tło.
+
+
+ Następnie używając tu atrybutu binding do listy zadań.
+
+```swift
+struct TaskListView: View {
+    let title: String
+    @Binding var tasks: [Task]
+    var body: some View {
+        List($tasks){ $task in
+            TaskView(task: $task)
+        }
+        .toolbar {
+            Button {
+                tasks.append(Task(title: "Nowe zadanie"))
+            } label: {
+                Label("Nowe zadanie", systemImage: "plus")
+            }
+        }
+    }
+}
+
+struct TaskListView_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskListView(title:"All", tasks: .constant(Task.examples()))
+    }
+}
+```
 
 
 
+ Jeśli przejdziesz teraz do wyboru wszystkich, mamy ten przycisk plus. I kiedy dodasz tutaj jedno, to się pojawia. Później, być może będziesz musiał wykonać jakieś programistyczne przewijanie, inaczej użytkownik tego nie zobaczy, lub też zarządzanie fokusem, o czym nie będę mówił. Możesz aktywować pole tekstowe. Zanim jednak będziemy mieli to pole tekstowe, ten focus, muszę przenieść się z etykiety tutaj do tekstu. Chcę faktycznie zmodyfikować to, co mam tutaj. Dlatego też utworzę nowy podwidok. To nowy plik `TaskView`. Chcę w nim modyfikować zadanie, więc musi to być ponownie binding var task. A potem w podglądzie, użyjemy `task.example()` aby dostarczył nam jakies dane do podglądu. 
+
+```swift
+struct TaskView: View {
+    @Binding var task: Task
+    var body: some View {
+        HStack{
+            Image(systemName: task.isCompleted ? "largecircle.fill.circle" : "circle")
+                .onTapGesture {
+                    task.isCompleted.toggle()
+                }
+            TextField("New Task",text: $task.title)
+                .textFieldStyle(.plain)
+        }
+    }
+}
+
+struct TaskView_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskView(task: .constant(Task.example()))
+            .padding()
+    }
+}
+```
+
+Okej, zaczynam od HStack. W zasadzie chcę zmodyfikować to, co już mam tutaj. Weźmy więc obraz i tekst. A następnie w podglądzie dodajemy padding. Niestety na macOS nie ma przycisku plus do przybliżania, nie wiem, dlaczego tego nie zrobili. Ale tak czy inaczej, jedną rzeczą, którą chcę zrobić, jest to, że gdy użytkownik kliknie na tą ikonę, chcę przełączyć stan. Wykorzystuję tap `on tab gesture` performing.
+
+```swift
+                .onTapGesture {
+                    task.isCompleted.toggle()
+                }
+```
+
+ I co chcę zrobić dla tego zadania, to zmienić tę właściwość completed, delikatnie ją przełączając. A drugą rzeczą jest zmiana tekstu na pole tekstowe "nowe zadanie". I binding do tytułu zadań. 
+
+```swift
+TextField("New Task",text: $task.title)
+```
+
+Na macOS pole tekstowe ma obramowanie i tło.Możesz to zmienić, mówiąc plain text field style. 
+
+```swift
+ .textFieldStyle(.plain)
+```
+
+Dobra, przetestujmy to w widoku listy zadań `TaskListView`. Zamieniam ten htag na mój widok zadania:
+
+```swift
+struct TaskListView: View {
+    let title: String
+    @Binding var tasks: [Task]
+    var body: some View {
+        List($tasks){ $task in
+            TaskView(task: $task)
+        }
+		...
+}
+=
+```
 
 
-> *You can change this by saying plain text field style. Okay, let's test this in the task list view. So I am going to replace this htag with my task view. view for this task where I need a binding. Same thing as before instead of when I used the for each with a binding I'm just making passing here the binding I return the binding. I'm going to the content view. Let's test this in the old section. I select one of these on the icon and then I go to the done section and these are still there. On iOS you would need to actually increase the touch target to make sure that you can actually touch this but as we have a mouse we can make things very small so I don't have to here make this icon super big. Okay now let's see how everything works together by actually building this project. So we have now a nice sidebar for the all section I can edit something, I can add a new task and change the name to "buy cat food" which I have to do today. This is the basics you can also check this and run this on iOS. Okay and now I have to add this target. Going to task manager, targets, general, support destinations. Then I add here one using the iPhone. Enable. Now I can choose an iPhone target. I just realized that when you're choosing iOS, List is going to complain because it doesn't want to use the task selection. That is because it it needs to be an optional. So I had to make here my binding selection optional and also in my content view here this also optional. When you launch the app like this and you will see first the this list. Somehow currently my simulator gives me problems. Usually it would be the full height. Because I already because here I started with a selection of all it will first show this view. On iOS I probably don't want to show anything so I would start with "nil". That's why it has to be optional. Like this we start with the first view. If I tap now on one of the section I go to the detail, we're showing all the tasks that are in this selection. Now I'm going to leave here this optional. This is one of the differences between macOS where you want to have master and detail and you can always show something in the detail, whereas on iOS you have the stacks as they use instead. Because I'm going to continue working on the macOS version I'm going to make it a little bit simpler and keep the all selection but as you see it's fairly easy to adapt for iOS.* 
+
+ Widok dla tego zadania, gdzie potrzebuję bindingu. To samo, co wcześniej, zamiast korzystać z for each z bindingiem, po prostu przekazuję tutaj binding, a następnie zwracam ten binding. 
+
+```swift
+struct TaskListView_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskListView(title:"All", tasks: .constant(Task.examples()))
+    }
+}
+```
+
+. Przetestujmy to w sekcji "Wszystko". Wybieram jedno z tych zadań ikoną, a następnie przechodzę do sekcji "Gotowe", i one są nadal widoczne. Na iOS musiałbyś zwiększyć obszar dotyku, aby upewnić się, że jesteś w stanie dotknąć, ale mamy mysz, więc możemy robić rzeczy bardzo małe, więc nie muszę tu robić tej ikony super dużą. Dobra, teraz zobaczmy, jak wszystko działa razem, budując ten projekt. 
+
+![2023-09-02_15-44-48 (1)](2023-09-02_15-44-48%20(1).gif)
 
 
 
-
-
-Możesz to zmienić, mówiąc plain text field style. Dobra, przetestujmy to w widoku listy zadań. Zamieniam ten htag na mój widok zadania. Widok dla tego zadania, gdzie potrzebuję bindingu. To samo, co wcześniej, zamiast korzystać z for each z bindingiem, po prostu przekazuję tutaj binding, a następnie zwracam ten binding. Wracam do widoku zawartości. Przetestujmy to w sekcji "Wszystko". Wybieram jedno z tych zadań ikoną, a następnie przechodzę do sekcji "Gotowe", i one są nadal widoczne. Na iOS musiałbyś zwiększyć obszar dotyku, aby upewnić się, że jesteś w stanie dotknąć, ale mamy mysz, więc możemy robić rzeczy bardzo małe, więc nie muszę tu robić tej ikony super dużą. Dobra, teraz zobaczmy, jak wszystko działa razem, budując ten projekt. Mamy teraz ładny pasek boczny dla sekcji "Wszystko". Mogę coś edytować, mogę dodać nowe zadanie i zmienić nazwę na "kupić karmę dla kota", co muszę zrobić dzisiaj. To podstawy, możesz to również sprawdzić i uruchomić na iOS. Dobra, teraz muszę dodać ten cel. Przechodzę do menedżera zadań, cele, ogólne, destynacje wsparcia. Następnie dodaję tu jedno, używając iPhone'a. Włącz. Teraz mogę wybrać cel iPhone'a. Właśnie zdałem sobie sprawę, że kiedy wybierasz iOS, Lista będzie narzekać, bo nie chce używać wyboru zadań. To dlatego, że to musi być opcjonalne. Musiałem więc zrobić tutaj mój binding selection jako opcjonalny, a także w moim widoku zawartości, tutaj też opcjonalny. Gdy uruchomisz aplikację w ten sposób, najpierw zobaczysz tę listę. Chyba obecnie mój symulator sprawia mi problemy. Zazwyczaj byłby to pełna wysokość. Ponieważ już od razu, bo tutaj zacząłem z wyborem "Wszystko", będzie najpierw pokazywać ten widok. Na iOS prawdopodobnie nie chcę pokazywać niczego, więc zacząłbym od "nil". Dlatego musi to być opcjonalne. W ten sposób zaczynamy od pierwszego widoku. Jeśli teraz kliknę w jedną z sekcji, przechodzę do szczegółów i pokazujemy wszystkie zadania, które są w tej sekcji. Teraz zostawię to jako opcjonalne. To jedna z różnic między macOS, gdzie chcesz mieć widok główny i szczegóły, i zawsze możesz pokazać coś w szczegółach, podczas gdy na iOS masz stosy, które zamiast tego używasz. Ponieważ będę kontynuować pracę nad wersją macOS, chcę ją trochę uprościć i zachować wybór "Wszystko", ale jak widzisz, jest to dość łatwe do dostosowania do iOS.
+Mamy teraz ładny pasek boczny dla sekcji "Wszystko". Mogę coś edytować, mogę dodać nowe zadanie i zmienić nazwę na "kupić karmę dla kota", co muszę zrobić dzisiaj. To podstawy, możesz to również sprawdzić i uruchomić na iOS. Dobra, teraz muszę dodać ten cel. Przechodzę do menedżera zadań, cele, ogólne, destynacje wsparcia. Następnie dodaję tu jedno, używając iPhone'a. Włącz. Teraz mogę wybrać cel iPhone'a. Właśnie zdałem sobie sprawę, że kiedy wybierasz iOS, Lista będzie narzekać, bo nie chce używać wyboru zadań. To dlatego, że to musi być opcjonalne. Musiałem więc zrobić tutaj mój binding selection jako opcjonalny, a także w moim widoku zawartości, tutaj też opcjonalny. Gdy uruchomisz aplikację w ten sposób, najpierw zobaczysz tę listę. Chyba obecnie mój symulator sprawia mi problemy. Zazwyczaj byłby to pełna wysokość. Ponieważ już od razu, bo tutaj zacząłem z wyborem "Wszystko", będzie najpierw pokazywać ten widok. Na iOS prawdopodobnie nie chcę pokazywać niczego, więc zacząłbym od "nil". Dlatego musi to być opcjonalne. W ten sposób zaczynamy od pierwszego widoku. Jeśli teraz kliknę w jedną z sekcji, przechodzę do szczegółów i pokazujemy wszystkie zadania, które są w tej sekcji. Teraz zostawię to jako opcjonalne. To jedna z różnic między macOS, gdzie chcesz mieć widok główny i szczegóły, i zawsze możesz pokazać coś w szczegółach, podczas gdy na iOS masz stosy, które zamiast tego używasz. Ponieważ będę kontynuować pracę nad wersją macOS, chcę ją trochę uprościć i zachować wybór "Wszystko", ale jak widzisz, jest to dość łatwe do dostosowania do iOS.
 
 
 
-> *Okay let's now continue implementing some of the interesting features for example search. I want to have here search text field in the toolbar and you can do this with a searchable modifier. I'm going to attach this here to my sidebar and I need to have your binding to a search text field. Again a state private var search term string starting with an empty and now I can use this here. This is per default added to the toolbar on the trailing side. You can also modify this here with the additional parameter of placement for example I can say sidebar and now it's moved to the sidebar. In this case it makes more sense in the toolbar because I want to filter all my tasks. So I'm just going to remove this. You can also move the position of this outside of the navigation view. Searchable has a lot of advanced things like tokens and scope. I will link some resources for this in the description. I also have a tutorial for search. Now I am going to make it rather quickly and we're going to filter the all tasks. So depending on if I actually have a search text field, if my search term is empty, then I'm using the default selections that we've had and else if I have something that I can filter with, I use something similar here with this filtering. in this case I use the title contains my search term. Okay let's try if I select something with crazy you see it searches and if I clear my text field it goes back to show all so this is in this case. There's a lot of other filters you could apply for example instead of using here this done and upcoming as a separate section you could also add here filter options for this. It's probably useful to have multiple filters included. For example, you can use tokens to search for multiple terms in the text. So something that contains crazy and it contains world, for example, then it would be this one. Although we have search on iOS, I think it's even more important on macOS. It's a productivity tool, you probably have a lot of data, notes, you really want to allow the user to search more fine grained. Okay, now let's go to the more macOS specifics. For example, keyboard shortcuts. Here to my add group button in the sidebar, I can add a keyboard shortcut. For example, key constant A with command.* 
+#### Wyszukiwanie
 
 
 

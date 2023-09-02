@@ -17,6 +17,7 @@
 		766CA6FF2AA3414300BE2D47 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA6FE2AA3414300BE2D47 /* SidebarView.swift */; };
 		766CA7012AA3415600BE2D47 /* StaticTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA7002AA3415600BE2D47 /* StaticTaskListView.swift */; };
 		766CA7032AA3666D00BE2D47 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA7022AA3666D00BE2D47 /* TaskListView.swift */; };
+		766CA7052AA36B3900BE2D47 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766CA7042AA36B3900BE2D47 /* TaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		766CA6FE2AA3414300BE2D47 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		766CA7002AA3415600BE2D47 /* StaticTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTaskListView.swift; sourceTree = "<group>"; };
 		766CA7022AA3666D00BE2D47 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		766CA7042AA36B3900BE2D47 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				766CA6E82AA2713C00BE2D47 /* ProjectTaskManagerApp.swift */,
 				766CA6FE2AA3414300BE2D47 /* SidebarView.swift */,
 				766CA7022AA3666D00BE2D47 /* TaskListView.swift */,
+				766CA7042AA36B3900BE2D47 /* TaskView.swift */,
 				766CA7002AA3415600BE2D47 /* StaticTaskListView.swift */,
 				766CA6EA2AA2713C00BE2D47 /* ContentView.swift */,
 				766CA6EC2AA2713E00BE2D47 /* Assets.xcassets */,
@@ -165,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766CA7052AA36B3900BE2D47 /* TaskView.swift in Sources */,
 				766CA7012AA3415600BE2D47 /* StaticTaskListView.swift in Sources */,
 				766CA6EB2AA2713C00BE2D47 /* ContentView.swift in Sources */,
 				766CA6F92AA271C800BE2D47 /* Task.swift in Sources */,
