@@ -34,16 +34,16 @@ struct TaskListView: View {
             }
         }
          //MARK: Avaiable in macos 14
-        .inspector(isPresented: $inspectorIsShown) {
-            Group{
-                if selectedTask {
-                    Text(selectedTask.title).font(.title)
-                } else {
-                    Text("nothing selected")
-                }
-            }
-            .frame(minWidth:100,maxWidth: .infinity)
-        }
+//        .inspector(isPresented: $inspectorIsShown) {
+//            Group{
+//                if selectedTask {
+//                    Text(selectedTask.title).font(.title)
+//                } else {
+//                    Text("nothing selected")
+//                }
+//            }
+//            .frame(minWidth:100,maxWidth: .infinity)
+//        }
     }
 }
 

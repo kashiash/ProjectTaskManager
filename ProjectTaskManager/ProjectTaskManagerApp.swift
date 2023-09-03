@@ -26,5 +26,11 @@ struct ProjectTaskManagerApp: App {
                 }
             }
         }
+        WindowGroup("Special window") {
+            Text("special window")
+                .frame(minWidth: 200, idealWidth: 300, minHeight: 200)
+        }
+        .defaultPosition(.leading)
+
     }
 }

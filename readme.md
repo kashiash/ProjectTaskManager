@@ -906,7 +906,41 @@ Porozmawiajmy trochę o oknach. Na przykład chcę zmienić tytuł mojego okna n
 
 ![2023-09-03_11-23-04 (1)](2023-09-03_11-23-04%20(1).gif)
 
-Potem, ponieważ wspominałem o oknach, jeśli chcesz na przykład mieć różne typy okien, możesz utworzyć inny typ grupy okien. Tutaj jest tytuł, a ID jest interesujące, jeśli chcesz programowo coś otworzyć. Na przykład, chcesz otworzyć jedno z zadań lub jedną z grup w nowym oknie. Wtedy możesz użyć ID, które określa, jakie informacje lub co chcesz pokazać. Teraz pokażę to bardzo krótko. "Special window" (Okno specjalne). Nie używam ID. A tutaj pokazuję tekst "Special window" (Okno specjalne). Teraz uruchommy to. Teraz, jeśli przejdziesz do "File" (Plik), a następnie "New" (Nowy), wcześniej było tam tylko "New Window" (Nowe okno). "New Window" (Nowe okno) to główne okno, to, które jest pierwsze zadeklarowane w twoim głównym pliku aplikacji. Teraz widzisz, że mam nowe "Special window" (Okno specjalne) z tymi informacjami. Kilka rzeczy, które możesz tutaj zrobić, to dodanie ramek. Ponownie, możesz ustawić minimalną szerokość i maksymalną szerokość, na przykład 200, 300, 200.
+Potem, ponieważ wspominałem o oknach, jeśli chcesz na przykład mieć różne typy okien, możesz utworzyć inny typ grupy okien. Tutaj jest tytuł, a ID jest interesujące, jeśli chcesz programowo coś otworzyć. Na przykład, chcesz otworzyć jedno z zadań lub jedną z grup w nowym oknie. Wtedy możesz użyć ID, które określa, jakie informacje lub co chcesz pokazać. Teraz pokażę to bardzo krótko. "Special window" (Okno specjalne).
+
+```swift
+struct ProjectTaskManagerApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .commands {
+            CommandMenu("Task") {
+                Button("Add new task") {
+
+                }
+                .keyboardShortcut(KeyEquivalent("r"),modifiers: .command)
+            }
+            CommandGroup(after: .newItem) {
+                Button("Add new group") {
+
+                }
+            }
+        }
+        WindowGroup("Special window") {
+            Text("special window")
+                .frame(minWidth: 200, idealWidth: 300, minHeight: 200)
+        }
+        .defaultPosition(.leading)
+
+    }
+```
+
+ A tutaj pokazuję tekst "Special window" (Okno specjalne). Teraz uruchommy to. Teraz, jeśli przejdziesz do "File" (Plik), a następnie "New" (Nowy), wcześniej było tam tylko "New Window" (Nowe okno). "New Window" (Nowe okno) to główne okno, to, które jest pierwsze zadeklarowane w twoim głównym pliku aplikacji. Teraz widzisz, że mam nowe "Special window" (Okno specjalne) z tymi informacjami. Kilka rzeczy, które możesz tutaj zrobić, to dodanie ramek. Ponownie, możesz ustawić minimalną szerokość i maksymalną szerokość, na przykład 200, 300, 200.
+
+
+
+![image-20230903113535694](image-20230903113535694.png)
 
 *Możesz również ustawić coś takiego jak rozmiar domyślnego okna, domyślną pozycję okna. Na przykład, jeśli chcesz, aby zawsze znajdowało się na przodzie, wypróbujmy. Teraz, jeśli przejdę do nowego "Special window" (Okno specjalne), faktycznie je dodaje, dobrze, dużo przybliżyłem. Dodaje je na przodzie, ale masz pojęcie. To daje ci trochę bardziej precyzyjną kontrolę nad rozmiarem, pozycją. Pozycją, stylem okna, lub stylem paska narzędziowego. Jeśli na przykład nie chcesz mieć tytułu nawigacji, na przykład w niektórych widokach szczegółów, i chcesz mieć rozszerzoną obszar paska narzędziowego, możesz to dostosować. Lub możliwość zmiany rozmiaru zawartości, minimalny rozmiar, rozmiar zawartości. Wszystkie te opcje są dość nowe, chyba od Mac OS 13. Na koniec, jeśli chcesz otworzyć nowe okno programowo, dodam to gdzieś. Musisz użyć środowiska do otwierania okna. Otwórz okno. Może to zrobić tutaj. Następnie wywołujesz otwarcie okna z identyfikatorem (id) i wartością (value). Zgadzam się, o to chodzi. Identyfikator (id) to ten, który ustawiasz w grupie okien, określając, jaki rodzaj okna chcesz otworzyć. Następnie możesz także przekazać dodatkowe wartości. Na przykład, jeśli chcesz powiedzieć, które zadanie chcesz otworzyć lub której grupy zadań, użyjesz tego typu wartości.
 
