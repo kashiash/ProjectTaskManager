@@ -29,9 +29,7 @@ struct ContentView: View {
                     StaticTaskListView(title:"Done", tasks: allTasks.filter({ $0.isCompleted }))
                 case .upcoming:
                     StaticTaskListView(title: "Upcoming", tasks: allTasks.filter({$0.isCompleted == false }))
-
                 case .list(let taskGroup):
-
                     StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
                 case .none:
                     TaskListView(title: "All", tasks: $allTasks)

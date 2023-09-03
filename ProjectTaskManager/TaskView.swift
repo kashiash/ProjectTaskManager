@@ -21,7 +21,9 @@ struct TaskView: View {
                 }
             TextField("New Task",text: $task.title)
                 .textFieldStyle(.plain)
+
             Button(action: {
+                inspectorIsShown = true
                 selectedTask = task
             }) {
                 Text("More")

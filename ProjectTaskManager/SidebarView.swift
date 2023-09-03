@@ -21,26 +21,27 @@ struct SidebarView: View {
                         .tag(selection)
                 }
             }
+
             Section("Your groups") {
                 ForEach($userCreatedGroups) { $group in
                     HStack{
                         Image(systemName: "folder")
                         TextField("Grupa",text: $group.title)
                     }
-                        .tag(TaskSection.list(group))
-                        .contextMenu {
-                            Button("Delete",role: .destructive) {
-                                if let index = userCreatedGroups.firstIndex(where: { $0.id == group.id}) {
-                                    userCreatedGroups.remove(at: index)
-                                }
+                    .tag(TaskSection.list(group))
+                    .contextMenu {
+                        Button("Delete",role: .destructive) {
+                            if let index = userCreatedGroups.firstIndex(where: { $0.id == group.id}) {
+                                userCreatedGroups.remove(at: index)
                             }
                         }
+                    }
                 }
             }
         }
         .safeAreaInset(edge: .bottom) {
             Button(action: {
-              let newGroup = TaskGroup(title: "Nowa Grupa")
+                let newGroup = TaskGroup(title: "Nowa Grupa")
                 userCreatedGroups.append(newGroup)
             }, label: {
                 Label("Add Group",systemImage: "plus.circle")
