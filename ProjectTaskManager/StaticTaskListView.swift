@@ -16,10 +16,9 @@ struct StaticTaskListView: View {
             HStack{
                 Image(systemName: task.isCompleted ? "largecircle.fill.circle" : "circle")
                 Text(task.title)
-                   
             }
-           
         }
+        .navigationTitle(title)
     }
 }
 

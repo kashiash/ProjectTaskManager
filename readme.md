@@ -776,9 +776,7 @@ Czasami na macOS można napotkać wiele problemów z konkurencyjnymi gestami, po
 
 
 
-> *One of the specifics for macOS, if you are serious about making an app for macOS, I would recommend going through the human interface guidelines for macOS. Then one of the newer things for macOS 14 that I now added is in the inspector area. So this is for example, here on Xcode, I have here this inspector. I should go here where we can see more details. A lot of the times you probably want to have this kind of inspector here. The cool thing is on Mac OS is this side in the detail view shown and on iOS this is a pop-up which is probably the expected behavior. So let's quickly do this and this inspector depends on the task that I have. So I'm going to use the task list view. Similar to all the other pop-ups or alerts, you use a modifier, inspector. Now I'm using your macros 14. If you're on a lower version, you probably leave this out because you can't test it. I need to have a constant saying, if I present this inspector, I thought it was a nice addition, so that's why I'm showing you. At state private var inspector is 14. is shown, bool, false. So this is inspector is shown. And then I need to actually have here something to show in the inspector. Show some details. Since I have here this inspector, I need to actually toggle this inspector is shown property. And I'm going to use the toolbar. Now we can use here toolbar item group with placement Item group so I can place two of them in there. So the other one is Inspector is shown toggling this show inspector And then let's just check what I can do use is it something with sidebar. Yeah, something like One of these let's test this I have here now is additional button If I tap you see it opens the sidebar. The first time it's having some issues with the animations and it's also not Ideally here with this I would prefer to have this kind of line all the time It's not sure how it's going to look as when it's released with macOS 14. So maybe this is changing a little bit Okay, this is great. Now I have your detail area, but I need to show something and What I wanted to do It's also not expendable We need to talk about this and what I wanted to do is I'm going to add here button with more where we can Show and hide this inspector in my task list Here for each of this task views. I want to have a button saying more is it? Ah, this is because Here's my little more button. Now. What do I want to do? I need to have a way of passing this information one level up where I have the inspector I try to add the inspector here but then it was just weird I need to pass the selected task up similar to before we also have it binding I have now a selected task this is optional because maybe I don't have anything selected Fixing this in the preview. Constant.nil. When I press on this button my selected task becomes this task. Then I go to task list where I need to have a property for selected task. This is a state private var because this view can own this state. I'm only managing from here where it's set in my task views and where it's shown here in my inspector. So this is a task optional starting with nil. Now I can pass this down to my views, selected task and I finally have something here in my inspector to show. If let selected task else, the else case is no, nothing selected. Okay maybe I should use a more nicer placeholder. Here I'm going to use the selected tasks title. Okay now if I press more you don't see anything because I need to actually show and hide this. This is another thing probably my sub view here also needs to change the inspector is shown property to make sure it's shown. So I go again to my task view this is another binding var boolean in in the preview, constant false. And in this case, when I press on the more button, I can set show inspector as shown to true. I don't want to toggle this, I always want to make sure it's shown. If it's already shown, I don't really mind. So then back in my task view, I can now use this inspector as shown here. Now when I press on more, it opens the sidebar with this detail. Maybe we do a little bit more here. You can also maybe show the dates, the descriptions that I never did more details, sub tasks. There's quite a lot of possibilities to do this. One thing that you might have already noticed is that I can't expand this.* 
-
-
+### Inspektor (temat do konczenia jak wyjdzie macos 14)
 
 Jednym z charakterystycznych elementów dla macOS jest to, że jeśli poważnie myślisz o tworzeniu aplikacji na macOS, zalecam zapoznanie się z przewodnikiem interfejsu użytkownika dla macOS (Human Interface Guidelines for macOS). Inną nowością w macOS 14, którą teraz dodałem, jest obszar inspektora. Jest to na przykład widoczne w Xcode, gdzie mamy ten inspektor. To miejsce, gdzie możemy zobaczyć więcej szczegółów. Wiele razy z pewnością chciałbyś mieć taki inspektor. Fajne jest to, że na macOS ten inspektor jest wyświetlany po boku w widoku szczegółów, a na iOS jest to typowe okno dialogowe. Teraz szybko to zaimplementujemy, a ten inspektor będzie zależny od wybranego zadania.
 
@@ -786,7 +784,82 @@ W widoku "task list view", podobnie jak w przypadku innych wyskakujących okiene
 
 Teraz, aby pokazać coś w inspektorze, potrzebujemy sposobu na pokazanie lub ukrycie inspektora. Będziemy to robić za pomocą paska narzędziowego (toolbar). Możemy użyć grupy elementów paska narzędziowego (toolbar item group) z opcją "placement" (położenie) ustawioną na "item group", aby umieścić w nim dwa elementy. Pierwszy to przycisk, który będzie pokazywać lub ukrywał inspektor, a drugi to przycisk "Inspector is shown", który będzie zmieniał stan właściwości "inspectorIsShown". Teraz musimy ustawić, gdzie te przyciski będą wyświetlane.
 
-Teraz, w moim widoku "task list view", dla każdego widoku zadania (task view), chcę dodać przycisk "Więcej" (More). Gdy zostanie on kliknięty, będziemy chcieli otworzyć inspektor, pokazując szczegóły wybranego zadania. Musimy przekazać informacje na wyższy poziom widoku, gdzie mamy inspektor. Najpierw przypisujemy wybrane zadanie do właściwości "selectedTask". Następnie w widoku "task list view" przekazujemy to zadanie do swoich widoków "task view".
+
+
+```swift
+struct TaskListView: View {
+    let title: String
+
+    @Binding var tasks: [Task]
+    @State private var inspectorIsShown: Bool = false
+    @State private var selectedTask: Task?
+
+    var body: some View {
+        List($tasks){ $task in
+            TaskView(task: $task,selectedTask: $selectedTask, inspectorIsShown: $inspectorIsShown)
+        }
+        .navigationTitle(title)
+        .toolbar {
+            ToolbarItemGroup{
+                Button {
+                    tasks.append(Task(title: "Nowe zadanie"))
+                } label: {
+                    Label("Nowe zadanie", systemImage: "plus")
+                }
+                Button {
+                    inspectorIsShown.toggle()
+                } label: {
+                    Label("Show inspector",systemImage: "sidebar.right")
+                }
+            }
+        }
+         //MARK: Avaiable in macos 14
+        .inspector(isPresented: $inspectorIsShown) {
+            if selectedTask {
+                Text(selectedTask.title).font(.title)
+            } else {
+                Text("nothing selected")
+            }
+        }
+    }
+}
+```
+
+Teraz, w moim widoku  `TaskListView` , dla każdego widoku zadania (TaskView), chcę dodać przycisk "Więcej" (More). Gdy zostanie on kliknięty, będziemy chcieli otworzyć inspektor, pokazując szczegóły wybranego zadania. Musimy przekazać informacje na wyższy poziom widoku, gdzie mamy inspektor. Najpierw przypisujemy wybrane zadanie do właściwości "selectedTask". Następnie w widoku `TaskListView` przekazujemy to zadanie do swoich widoków `TaskView`.
+
+
+
+```swift
+struct TaskView: View {
+    
+    @Binding var task: Task
+    @Binding var selectedTask: Task?
+    @Binding var inspectorIsShown: Bool
+
+    var body: some View {
+        HStack{
+            Image(systemName: task.isCompleted ? "largecircle.fill.circle" : "circle")
+                .onTapGesture {
+                    task.isCompleted.toggle()
+                }
+            TextField("New Task",text: $task.title)
+                .textFieldStyle(.plain)
+            Button(action: {
+                selectedTask = task
+            }) {
+                Text("More")
+            }
+        }
+    }
+}
+
+struct TaskView_Previews: PreviewProvider {
+    static var previews: some View {
+        TaskView(task: .constant(Task.example()),selectedTask: .constant(nil),inspectorIsShown: .constant(false))
+            .padding()
+    }
+}
+```
 
 W inspektorze, który będzie wyświetlany po prawej stronie, sprawdzamy, czy jest wybrane zadanie, jeśli nie ma, to pokazujemy placeholder, który mówi, że nie ma wybranego zadania. Jeśli jest wybrane zadanie, to wyświetlamy jego tytuł.
 
@@ -796,15 +869,44 @@ Teraz, w widoku "task view", możemy użyć właściwości "inspectorIsShown" do
 
 To dopiero początek, możesz dodać więcej informacji do inspektora, takie jak daty, opisy, podzadania itp. Jednak obecnie inspektor nie jest rozszerzalny (nie można go maksymalizować), co może być jednym z ograniczeń.
 
+Na macOS zawsze musisz dodać elastyczne ramy. Więc użyję grupy (Group), aby dodać je do wszystkiego. Frame,  `.frame(minWidth:100,maxWidth: .infinity)`. Teraz użytkownik może rozszerzać ten Widok.Powinieneś dodać takie elastyczne ramy do bocznego panelu, okien i gdziekolwiek indziej jest to potrzebne. 
+
+```swift
+         //MARK: Avaiable in macos 14
+        .inspector(isPresented: $inspectorIsShown) {
+            Group{
+                if selectedTask {
+                    Text(selectedTask.title).font(.title)
+                } else {
+                    Text("nothing selected")
+                }
+            }
+            .frame(minWidth:100,maxWidth: .infinity)
+        }
+```
+
+Czasami może to wydawać się trochę dziwne, ale musisz dodać elastyczne ramy do wszystkiego.
+
+### Inne rodzje okien
+
+Porozmawiajmy trochę o oknach. Na przykład chcę zmienić tytuł mojego okna na tytuł, który mam w TaskListView jako parametr, i używamy do tego modyfikatora navigationTitle. 
 
 
 
+```swift
+        ...
+				List($tasks){...}
+        .navigationTitle(title)
+        .toolbar {...}
+```
 
-> *On macOS you always have to add flexible frames. So I'm going to use a group so I can add this around everything. Frame, frame, min width of 100, maximum of infinity. maximum of infinity now you can the user can extend this okay I guess I have to run this you should add this kind of frames to the sidebar to the windows whatever you need so if I expand the sidebar this one works sometimes this is a bit strange you need to add flexible frames around everything other things that I actually did not do is how do you set the window title let's talk a little bit about windows. For example here I want to change the title of my window to the title that I have here and you use the navigation title. Let's try this. I am now in my selection of all and this title is set to all. If I go to the other ones it goes to the task manager. This is the default name. Could also because this view I actually did not use the title. Then because I talked about windows if you want to for example have different window types you can create Create another window group. This is the title and ID is interesting if you want to do programmatically open something. For example, you want to open one of your tasks or one of your groups in a new window. You could use the ID would be then one of your information or what to show. I'm going to make this very shortly now. Special window. Don't use an ID. And I show here a text of special window. Now let's run this. Now, if you go on the file, new, previously this was just new window. This is the main window, the one that you first, that is first declared in your main app file. Now you see, I have my new special window with here this information. Some things that you can do here is adding frames. Again, for minimum width and maximum. sometimes I should probably like 200, 300, 200. Can also set something like window, the default window size, the default window position. For example, if you want to have it on the leading edge always, let's try. Now if I go onto new special window, it actually adds it, okay, I zoomed in a lot. It adds it on the leading edge, but you get the idea. It's a little bit more fine control of what's the sizes. Position, the window style. or the toolbar style. If you don't want to have the navigation title, for example, for some of your detail views, you want to have an extended toolbar area, you can decide this. Or resizability of content, minimum size, content size. All of these are quite new, I think for Mac OS 13. Last, if you want to open programmatically a new window, I'm just going to add to somewhere. You have to use the environment for open window. Open window. Okay, maybe I just do this here. You would then call open window with id and value. I agree, this is the one. The id is the one where you use, where you set in the window group, what kind of window type you want to open this with. And then you can also pass in additional values. For example, if you want to say which task you want to open or which task group you want to open, you would use this value type.* 
+ Teraz jestem w sekcji "all" (wszystkie) i ten tytuł jest ustawiony na "all". Jeśli przejdę do innych, przechodzę do menadżera zadań (task manager). 
 
 
 
-*Na macOS zawsze musisz dodać elastyczne ramy. Więc użyję grupy (Group), aby dodać je do wszystkiego. Frame, frame, min szerokość 100, maksymalna nieskończoność (infinity). Teraz użytkownik może rozszerzać to, ok, myślę, że muszę to uruchomić. Powinieneś dodać takie elastyczne ramy do bocznego panelu, okien i gdziekolwiek indziej jest to potrzebne. Więc jeśli rozszerzysz boczny panel, to zadziała. Czasami może to wydawać się trochę dziwne, ale musisz dodać elastyczne ramy do wszystkiego. Inne rzeczy, których właściwie nie zrobiłem, to jak ustawić tytuł okna. Porozmawiajmy trochę o oknach. Na przykład chcę zmienić tytuł mojego okna na tytuł, który mam tutaj, i używamy do tego modyfikatora navigationTitle. Spróbujmy tego. Teraz jestem w sekcji "all" (wszystkie) i ten tytuł jest ustawiony na "all". Jeśli przejdę do innych, przechodzę do menadżera zadań (task manager). To jest domyślna nazwa. Może to być spowodowane tym, że w tym widoku właściwie nie użyłem tytułu. Potem, ponieważ wspominałem o oknach, jeśli chcesz na przykład mieć różne typy okien, możesz utworzyć inny typ grupy okien. Tutaj jest tytuł, a ID jest interesujące, jeśli chcesz programowo coś otworzyć. Na przykład, chcesz otworzyć jedno z zadań lub jedną z grup w nowym oknie. Wtedy możesz użyć ID, które określa, jakie informacje lub co chcesz pokazać. Teraz pokażę to bardzo krótko. "Special window" (Okno specjalne). Nie używam ID. A tutaj pokazuję tekst "Special window" (Okno specjalne). Teraz uruchommy to. Teraz, jeśli przejdziesz do "File" (Plik), a następnie "New" (Nowy), wcześniej było tam tylko "New Window" (Nowe okno). "New Window" (Nowe okno) to główne okno, to, które jest pierwsze zadeklarowane w twoim głównym pliku aplikacji. Teraz widzisz, że mam nowe "Special window" (Okno specjalne) z tymi informacjami. Kilka rzeczy, które możesz tutaj zrobić, to dodanie ramek. Ponownie, możesz ustawić minimalną szerokość i maksymalną szerokość, na przykład 200, 300, 200.
+![2023-09-03_11-23-04 (1)](2023-09-03_11-23-04%20(1).gif)
+
+Potem, ponieważ wspominałem o oknach, jeśli chcesz na przykład mieć różne typy okien, możesz utworzyć inny typ grupy okien. Tutaj jest tytuł, a ID jest interesujące, jeśli chcesz programowo coś otworzyć. Na przykład, chcesz otworzyć jedno z zadań lub jedną z grup w nowym oknie. Wtedy możesz użyć ID, które określa, jakie informacje lub co chcesz pokazać. Teraz pokażę to bardzo krótko. "Special window" (Okno specjalne). Nie używam ID. A tutaj pokazuję tekst "Special window" (Okno specjalne). Teraz uruchommy to. Teraz, jeśli przejdziesz do "File" (Plik), a następnie "New" (Nowy), wcześniej było tam tylko "New Window" (Nowe okno). "New Window" (Nowe okno) to główne okno, to, które jest pierwsze zadeklarowane w twoim głównym pliku aplikacji. Teraz widzisz, że mam nowe "Special window" (Okno specjalne) z tymi informacjami. Kilka rzeczy, które możesz tutaj zrobić, to dodanie ramek. Ponownie, możesz ustawić minimalną szerokość i maksymalną szerokość, na przykład 200, 300, 200.
 
 *Możesz również ustawić coś takiego jak rozmiar domyślnego okna, domyślną pozycję okna. Na przykład, jeśli chcesz, aby zawsze znajdowało się na przodzie, wypróbujmy. Teraz, jeśli przejdę do nowego "Special window" (Okno specjalne), faktycznie je dodaje, dobrze, dużo przybliżyłem. Dodaje je na przodzie, ale masz pojęcie. To daje ci trochę bardziej precyzyjną kontrolę nad rozmiarem, pozycją. Pozycją, stylem okna, lub stylem paska narzędziowego. Jeśli na przykład nie chcesz mieć tytułu nawigacji, na przykład w niektórych widokach szczegółów, i chcesz mieć rozszerzoną obszar paska narzędziowego, możesz to dostosować. Lub możliwość zmiany rozmiaru zawartości, minimalny rozmiar, rozmiar zawartości. Wszystkie te opcje są dość nowe, chyba od Mac OS 13. Na koniec, jeśli chcesz otworzyć nowe okno programowo, dodam to gdzieś. Musisz użyć środowiska do otwierania okna. Otwórz okno. Może to zrobić tutaj. Następnie wywołujesz otwarcie okna z identyfikatorem (id) i wartością (value). Zgadzam się, o to chodzi. Identyfikator (id) to ten, który ustawiasz w grupie okien, określając, jaki rodzaj okna chcesz otworzyć. Następnie możesz także przekazać dodatkowe wartości. Na przykład, jeśli chcesz powiedzieć, które zadanie chcesz otworzyć lub której grupy zadań, użyjesz tego typu wartości.
 
